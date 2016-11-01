@@ -33,27 +33,27 @@
  *		+ added set_rotation for rotated screen
  *		+ added scale functionality to draw char, string and value functions (will break current implimentations)
  *	== 0.2.4.1
- *		~changed the drawAll function to support rotated scrrens
+ *		~ changed the drawAll function to support rotated scrrens
  *	== 0.2.5
- *		+added lcdDrawSpritePartial(for when only part of the sprite needed to be drwn (ie only part on screen)
- *		+added lcdDrawSpriteScaledPartial for above purpose
- *		+added \n functionality to lcdDrawS (alows multiline strings)
- *		~changed fonts to be stored and used from program memory (saves about 900bytes of memory per font)
- *		~hevaly reworked the way fonts work (no visasble difference to end user)
- *		+-?added memDump(). use at your own peril
+ *		+ added lcdDrawSpritePartial(for when only part of the sprite needed to be drwn (ie only part on screen)
+ *		+ added lcdDrawSpriteScaledPartial for above purpose
+ *		+ added \n functionality to lcdDrawS (alows multiline strings)
+ *		~ changed fonts to be stored and used from program memory (saves about 900bytes of memory per font)
+ *		~ hevaly reworked the way fonts work (no visasble difference to end user)
+ *		+-? added memDump(). use at your own peril
  *	== 0.2.5.1
  *		+changed lcdDrawX to take 8bits at a time and put out 2characters always, behaviour now far more predictable
  *	== 0.2.6pre1
- *		+added lcdDrawSP to draw strings from program memory
- *		+added FONTSTART and FONTEND for use in extended fonts (must be defined before including pictor.h)
- *		~changed string/char drawing to used unsigned chars (again to support extended fonts)[should not affect normal fonts]
+ *		+ added lcdDrawSP to draw strings from program memory
+ *		+ added FONTSTART and FONTEND for use in extended fonts (must be defined before including pictor.h)
+ *		~ changed string/char drawing to used unsigned chars (again to support extended fonts)[should not affect normal fonts]
  *	== 0.2.6
- *		-removed functions that dont work poroperly or lack purpose in prep for moving to a modular system in 1.0
- *		-removed lcdDrawLine
- *		-remoded lcdDrawShape
- *		-remoded shape typedef
- *		-removed color typedef (its just uint16_t)
- *		-removed point arithmatic (hardly used)
+ *		- removed functions that dont work poroperly or lack purpose in prep for moving to a modular system in 1.0
+ *		- removed lcdDrawLine (unusual behaviour in edge cases, will re-add when fixed)
+ *		- remoded lcdDrawShape (never finished implementation due to DrawLine issues)
+ *		- remoded shape typedef (no longer needed)
+ *		- removed color typedef (its just uint16_t)
+ *		- removed point arithmatic (hardly used)
  */
 
 #ifndef PICTOR
