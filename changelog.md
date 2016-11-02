@@ -33,7 +33,7 @@
 * \+ added lcdDrawSpriteScaledPartial for above purpose
 * \+ added \n functionality to lcdDrawS (alows multiline strings)
 * ~ changed fonts to be stored and used from program memory (saves about 900bytes of memory per font)
-* ~ hevaly reworked the way fonts work (no visasble difference to end user)
+* ~ heavily reworked the way fonts work (no visasble difference to end user)
 * \+-? added memDump(). use at your own peril
 
 ### 0.2.5.1
@@ -46,7 +46,45 @@
 
 ### 0.2.6
 * \- removed lcdDrawLine (unusual behaviour in edge cases, will re-add when fixed)
-* \- remoded lcdDrawShape (never finished implementation due to DrawLine issues)
-* \- remoded shape typedef (no longer needed)
+* \- removed lcdDrawShape (never finished implementation due to DrawLine issues)
+* \- removed shape typedef (no longer needed)
 * \- removed color typedef (its just uint16_t)
-* \- removed point arithmatic (hardly used)
+* \- removed point arithmetic (hardly used)
+
+### 0.3.0
+* \- removed changelog from pictor.h as it is now here
+* ~ changed names of functions and defines to make them more consistent
+* ~ changed FONTSTART and FONTEND to PICTOR_FONTSTART and PICTOR_FONTEND
+* ~ changed LCD_MAX and LCD_SIZE to PICTOR_MAX and PICTOR_SIZE
+* ~ changed LCD_FASTMODE to PICTOR_FASTMODE
+* ~ changed lcdCmdWrite to pictorCmdWrite
+* ~ changed lcdByteWrite to pictorByteWrite
+* ~ changed lcdWordWrite to pictorWordWrite
+* ~ changed lcdByteRead to pictorByteRead
+* ~ changed lcdWordRead to pictorWordRead
+* ~ changed lcdBacklightState to pictorBacklightState
+* ~ changed lcdWrite to pictorWrite
+* ~ changed lcdRead to pictorRead
+* ~ changed lcdCanvasSet to pictorCanvasSet
+* ~ changed set_rotation to pictorSetRotation
+* ~ changed lcdDrawC to pictorDrawC
+* ~ changed lcdDrawS to pictorDrawS
+* ~ changed lcdDrawSP to pictorDrawSP
+* ~ changed lcdDrawD to a special case of the new pictorDrawD (len=0)
+* ~ changed lcdDrawDl to pictorDrawD
+* ~ changed lcdDrawX to pictorDrawX
+* ~ changed lcdDrawPixel to pictorDrawPixel
+* ~ changed lcdDrawBox to pictorDrawBox
+* ~ changed lcdDrawAll to pictorDrawAll
+* ~ changed lcdDrawSprite to a special case of the new pictorDrawSprite (scale=1)
+* ~ changed lcdDrawSpriteScaled to pictorDrawSprite
+* ~ changed lcdDrawSpritePartial to a special case of the new pictorDrawSpritePartial (scale=1)
+* ~ changed lcdDrawSpriteScaledPartial to pictorDrawSpritePartial
+* ~ changed lcdDrawCircle to pictorDrawCircle
+* ~ changed lcdInit to pictorInit
+* ~ changed memDump to pictorMemDump
+* ~ changed lcdRot to pictorRot
+* \- removed the ability to scale separately in x and y (simplifies code as was rarely used)
+* \+ fixed lcdDrawD issues with negative numbers
+
+
