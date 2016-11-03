@@ -1,0 +1,201 @@
+This documentation includes descriptions of all the pictor functions defined in pictor.h.
+For regular use the LCD CMD sections can be ignored.
+
+===============
+ COLOUR ENCODING
+===============
+uint16_t encode656Colour(const uint8_t Red, const uint8_t Green, const uint8_t Blue);
+	Creates a colour encoded in 656-RGB from individual RGB bytes, for use in other pictor functions.
+	Parameters:
+		Red, Green, Blue	RGB values as 8-bit integers.
+	Return Value:
+		16-bit integer of 656-RGB encoded colour.
+
+===============
+ BASE LCD CMDS
+===============
+inline void pictorCmdWrite(const uint8_t Cmd);
+	Sends a command byte to the screen.
+	Parameters:
+		Cmd		The 8-bit command byte for the screen (see ILI9341 datasheet).
+
+inline void pictorByteWrite(const uint8_t Data);
+	Sends a data byte to the screen.
+	Parameters:
+		Data	The 8-bit data byte.
+
+inline void pictorWordWrite(uint16_t Value);
+	Sends two data bytes to the screen.
+	Parameters:
+		Value	The 16-bit data word.
+
+inline uint8_t pictorByteRead();
+	Returns a data byte read from the screen.
+	Return Value:
+		8-bit data byte from the screen.
+
+inline uint16_t pictorWordRead();
+	Returns a word from two data bytes read from the screen.
+	Return Value:
+		16-bit data word from the screen.
+
+void pictorBacklightState(const int8_t State);
+	Sets the state of the backlight.
+	Parameters:
+		State	Backlight state (1 = ON, 0 = OFF, -1 = TOGGLE).
+
+================
+ LCD ARRAY CMDS
+================
+
+void pictorWrite(const uint8_t Cmd, const uint8_t * Parameter, const uint8_t Count);
+	Writes a command and a byte array containing its parameters to the screen.
+	Note: This command is not currently implemented.
+	Parameters:
+		Cmd			The 8-bit command byte for the screen (see ILI9341 datasheet).
+		Parameter	Pointer to a buffer of 8-bit parameters.
+		Count		Number of parameters to send.
+
+void pictorRead(const uint8_t Cmd, uint8_t * Buffer, const uint8_t Count);
+	Writes a command and reads out an array of byte data into a buffer from the screen.
+	Parameters:
+		Cmd		The 8-bit command byte for the screen (see ILI9341 datasheet).
+		Buffer	Pointer to a buffer where the resulting data is stored.
+		Count	Number of bytes to read into Buffer.
+
+====================
+ LCD COMPOSITE CMDS
+====================
+void pictorCanvasSet(const point A, const point B);
+	Sets a drawing canvas on the screen.
+	Parameters:
+		A	Point structure for top-left corner of the canvas.
+		B	Point structure for bottom-right corner of the canvas.
+
+void pictorSetRotation(const uint8_t rotation);
+	Set the orientation of the screen.
+	Parameters:
+		rotation	enum value of the screen rotation.
+						0:	Standard portrait orientation (Same rotation as the PCB labelling).
+						1:	Standard landscape orientation (90 degree clockwise rotation).
+						2:	Inverted portrait orientation (180 degree rotation).
+						3:	Inverted landscape orientation (90 degree anti-clockwise rotation).
+
+=========================
+ LCD DRAW CHAR FUNCTIONS
+=========================
+void pictorDrawC(const unsigned char Char, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font * Font, uint8_t scale);
+	Draws a character onto the screen at the specified position with a set font, and foreground and background colours.
+	Parameters:
+		Char				Character to be written to the screen.
+		Pos					Point structure to the top-left corner of the character's intended location.
+		ForegroundColour	Colour of the character as a 656-RGB encoded colour.
+		BackgroundColour	Colour of the background as a 656-RGB encoded colour.
+		Font				Pointer to the font array to be used for the character.
+		scale				Integer character size scale (Note: a scale of 1 gives a character 8 pixels tall by 8 pixels wide).
+
+uint8_t pictorDrawS(const unsigned char * Buffer, point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font * Font, uint8_t scale);
+	Draws a string onto the screen at the specified position with a set font, and foreground and background colours.
+	Parameters:
+		Buffer				String to be written to the screen.
+		Pos					Point structure to the top-left corner of the characters' intended location.
+		ForegroundColour	Colour of the characters as a 656-RGB encoded colour.
+		BackgroundColour	Colour of the background as a 656-RGB encoded colour.
+		Font				Pointer to the font array to be used for the characters.
+		scale				Integer character size scale (Note: a scale of 1 gives a character 8 pixels tall by 8 pixels wide).
+	Return Value:
+		Number of characters written to the screen.
+
+uint8_t pictorDrawSP(const unsigned char * Buffer, point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font * Font, uint8_t scale);
+	Draws a string from program memory onto the screen at the specified position with a set font, and foreground and background colours.
+	Parameters:
+		Buffer				String to be written to the screen.
+		Pos					Point structure to the top-left corner of the characters' intended location.
+		ForegroundColour	Colour of the characters as a 656-RGB encoded colour.
+		BackgroundColour	Colour of the background as a 656-RGB encoded colour.
+		Font				Pointer to the font array to be used for the characters.
+		scale				Integer character size scale (Note: a scale of 1 gives a character 8 pixels tall by 8 pixels wide).
+	Return Value:
+		Number of characters written to the screen.
+
+=========================
+ LCD DRAW Number FUNCTIONS
+=========================
+void pictorDrawD(const int Number, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font * Font, uint8_t scale, uint8_t len);
+	Draws a number in decimal onto the screen at the specified position with a set font, and foreground and background colours.
+	The number is padded to fill the specified length using spaces, use a length of 0 to ignore padding.
+	Parameters:
+		Number				Number to be written to the screen.
+		Pos					Point structure to the top-left corner of the first character's intended location.
+		ForegroundColour	Colour of the characters as a 656-RGB encoded colour.
+		BackgroundColour	Colour of the background as a 656-RGB encoded colour.
+		Font				Pointer to the font array to be used for the characters.
+		scale				Integer character size scale (Note: a scale of 1 gives a character 8 pixels tall by 8 pixels wide).
+		len					Output width padded with spaces, the value is not truncated even if the result is larger than the length specified. To remove padding use the value 0.
+
+uint8_t pictorDrawX(const uint8_t Value, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font * Font, uint8_t scale);
+	Draws a value in hexadecimal onto the screen at the specified position with a set font, and foreground and background colours.
+	Parameters:
+		Value				8-bit value to be written to the screen.
+		Pos					Point structure to the top-left corner of the first character's intended location.
+		ForegroundColour	Colour of the characters as a 656-RGB encoded colour.
+		BackgroundColour	Colour of the background as a 656-RGB encoded colour.
+		Font				Pointer to the font array to be used for the characters.
+		scale				Integer character size scale (Note: a scale of 1 gives a character 8 pixels tall by 8 pixels wide).
+	Return Value:
+		Number of characters written to the screen.
+
+=================
+ LCD DRAW SHAPES
+=================
+void pictorDrawPixel(const point Pos, const uint16_t Colour);
+	Draws a single pixel with a specified colour at the specified position.
+	Parameters:
+		Pos			Point structure to pixel's intended location.
+		Colour		Colour for the pixel as a 656-RGB encoded colour.
+
+void pictorDrawBox(point A, point B, const uint16_t Colour);
+	Draws a solid box with a specified colour between the points A and B.
+	Parameters:
+		A			Point structure the intended location of a corner of the area.
+		B			Point structure the intended location of the opposite corner of the area.
+		Colour		Colour for the area as a 656-RGB encoded colour.
+
+void pictorDrawAll(const uint16_t Colour);
+	Fills the screen with the specified colour.
+	Parameters:
+		Colour		Colour for the screen as a 656-RGB encoded colour.
+
+void pictorDrawSprite(const sprite * Sprite, const point Pos, const uint8_t Scale);
+	Draws a Sprite top left aligned at Pos scaled by Scale.
+	Parameters:
+		Sprite	Pointer to the sprite array to be written to the screen.
+		Pos		Point structure to the top-left corner of the sprite's intended location.
+		Scale	Integer size scale (Note: A scale of 1 produces a pixel to pixel representation of the stored sprite).
+
+void pictorDrawSpritePartial(const sprite * Sprite, const point Pos, const uint8_t Scale, point X1, point X2);
+	Draw part of a sprite selected by X1 and X2.
+	Parameters:
+		Sprite	Pointer to the sprite array to be written to the screen.
+		Pos		Point structure to the top-left corner of the sprite's intended location.
+		Scale	Integer size scale (Note: A scale of 1 produces a pixel to pixel representation of the stored sprite).
+		X1		Point structure between the top-left of the total sprite and the top-left corner to be drawn.
+		X2		Point structure between the top-left of the total sprite and the bottom-right corner to be drawn.
+
+void pictorDrawCircle(const point Centre, const uint8_t Radius, const uint16_t Colour);
+	Draws a circle using Bresenham's algorithm of the specified colour around a defined centre of the specified radius.
+	Parameters:
+		Centre		Point structure to the intended location of the centre of the circle.
+		Radius		The radius of the circle in pixels.
+		Colour		Colour of the circle as a 656-RGB encoded colour.
+
+====================
+ LCD INTITALISATION
+====================
+void pictorInit(const uint8_t Mode);
+	Initialises the screen. Currently Mode is unused, but will later do stuff (Use 0 for now).
+Parameters:
+		Mode	Mode to initialise the screen in. Currently unused, set to 0 for future compatibility.
+
+void pictorMemDump()
+	Dump the entire of ram and program memory to the screen.
