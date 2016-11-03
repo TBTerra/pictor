@@ -48,12 +48,11 @@ void pictorBacklightState(const int8_t State);
  LCD ARRAY CMDS
 ================
 
-void pictorWrite(const uint8_t Cmd, const uint8_t * Parameter, const uint8_t Count);
+void pictorWrite(const uint8_t Cmd, const uint8_t * Buffer, const uint8_t Count);
 	Writes a command and a byte array containing its parameters to the screen.
-	Note: This command is not currently implemented.
 	Parameters:
 		Cmd			The 8-bit command byte for the screen (see ILI9341 datasheet).
-		Parameter	Pointer to a buffer of 8-bit parameters.
+		Buffer		Pointer to a buffer of 8-bit parameters.
 		Count		Number of parameters to send.
 
 void pictorRead(const uint8_t Cmd, uint8_t * Buffer, const uint8_t Count);
