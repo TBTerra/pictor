@@ -21,17 +21,17 @@
 ### 0.2.4
 * \+ drasticly increased draw sprite and draw sprite scaled performance (50-70% increase)
 * ~ changed the low level functions to inline for minor speed increase at neglagable extra memory
-* ~ changed some loops to use pre-decrement rather than post-decrement because somehow thats faster
+* ~ changed some loops to use pre-decrement rather than post-decrement because somehow that's faster
 * \+ added set_rotation for rotated screen
-* \+ added scale functionality to draw char, string and value functions (will break current implimentations)
+* \+ added scale functionality to draw char, string and value functions (will break current implementations)
 
 ### 0.2.4.1
-* ~changed the drawAll function to support rotated scrrens
+* ~changed the drawAll function to support rotated screens
 
 ### 0.2.5
 * \+ added lcdDrawSpritePartial(for when only part of the sprite needed to be drwn (ie only part on screen)
 * \+ added lcdDrawSpriteScaledPartial for above purpose
-* \+ added \n functionality to lcdDrawS (alows multiline strings)
+* \+ added \n functionality to lcdDrawS (allows multi-line strings)
 * ~ changed fonts to be stored and used from program memory (saves about 900bytes of memory per font)
 * ~ heavily reworked the way fonts work (no visasble difference to end user)
 * \+-? added memDump(). use at your own peril
@@ -87,4 +87,6 @@
 * \- removed the ability to scale separately in x and y (simplifies code as was rarely used)
 * \+ fixed lcdDrawD issues with negative numbers
 
-
+### 0.3.1
+* \+ added back in pictorWrite (acedently removed in 0.3.0)
+* ~ updated pictorDrawCircle description to better represent functionality

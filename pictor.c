@@ -110,11 +110,6 @@ void pictorArrayWrite(const uint8_t * Data, const uint16_t Count){
 #endif
 }
 
-void pictorByteArrayWrite(const uint8_t Cmd, const uint8_t * Data, const uint16_t Count) {
-	pictorCmdWrite(Cmd);
-	pictorArrayWrite(Data,Count);
-}
-
 void pictorWordArrayWrite(const uint8_t Cmd, const uint16_t * Data, const uint16_t Count) {
 #ifndef PICTOR_FASTMODE	
 	uint8_t I = 0;
@@ -269,6 +264,11 @@ void pictorRepeatedWordWrite(const uint8_t Cmd, const uint16_t Data, uint16_t Co
 		DATAPORT  =  HighByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE; DATAPORT  =  LowByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
 	}
 #endif
+}
+
+void pictorWrite(const uint8_t Cmd, const uint8_t * Buffer, const uint8_t Count){
+	pictorCmdWrite(Cmd);
+	pictorArrayWrite(Data,Count);
 }
 
 void pictorRead(const uint8_t Cmd, uint8_t * Buffer, const uint8_t Count) {
@@ -663,9 +663,9 @@ void pictorInit(const uint8_t Mode) {
 	pictorCmdWrite(0x3A);
 	pictorByteWrite(0x55);
 	uint8_t PosGammaCorrections[15] = {0x1F, 0x1A, 0x18, 0x0A, 0x0F, 0x06, 0x45, 0x87, 0x32, 0x0A, 0x07, 0x02, 0x07, 0x05, 0x00};
-	pictorByteArrayWrite(0xE0, PosGammaCorrections, 15);
+	pictorWrite(0xE0, PosGammaCorrections, 15);
 	uint8_t NegGammaCorrections[15] = {0x00, 0x25, 0x27, 0x05, 0x10, 0x09, 0x3A, 0x78, 0x4D, 0x05, 0x18, 0x0D, 0x38, 0x3A, 0x1F};
-	pictorByteArrayWrite(0xE1, NegGammaCorrections, 15);
+	pictorWrite(0xE1, NegGammaCorrections, 15);
 	pictorCmdWrite(0x34); // Tearing OFF
 	pictorCmdWrite(0xB4); // Inversion OFF
 	pictorByteWrite(0x00);

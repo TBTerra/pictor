@@ -1,7 +1,7 @@
-# Pictor 0.3.0
+# Pictor 0.3.1
 ### Graphics library for the Il Matto Board with attached screen
 
-#### Warning: pictor 0.3.0 is not backwards compatible with earlier pictors due to re-worked function names
+#### Warning: pictor 0.3.0 and onwards is not backwards compatible with earlier pictors due to re-worked function names
 
 This was originally written in 2013 by a small group of first year students (Henry Wilson, Terra Barber, Emma Curati-Alasonatti and Chris Turner.), who couldn't wait to be given the official library
 

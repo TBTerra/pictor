@@ -1,4 +1,4 @@
-/*	Pictor.h	VERSION 0.3.0
+/*	Pictor.h	VERSION 0.3.1
  *	Screen driver for the IlMatto and 2.2" screen combo
  *	Use port A for control & port C for data.
  *
@@ -108,7 +108,7 @@ void pictorBacklightState(const int8_t State);
 // LCD ARRAY CMDS
 //================
 //	Writes a command and a byte array containing its parameters to the screen.
-void pictorWrite(const uint8_t Cmd, const uint8_t * Parameter, const uint8_t Count);
+void pictorWrite(const uint8_t Cmd, const uint8_t * Buffer, const uint8_t Count);
 //	Writes a command and reads out an array of byte data into a buffer from the screen.
 void pictorRead(const uint8_t Cmd, uint8_t * Buffer, const uint8_t Count);
 
@@ -149,7 +149,7 @@ void pictorDrawAll(const uint16_t Colour);
 void pictorDrawSprite(const sprite * Sprite, const point Pos, const uint8_t Scale);
 //draw part of a sprite selected by X1 and X2
 void pictorDrawSpritePartial(const sprite * Sprite, const point Pos, const uint8_t Scale, point X1, point X2);
-//	Draws a circle using Bresenham's algorithm with colour between points A and B.
+//	Draws a circle using Bresenham's algorithm with a given centre point and radius
 void pictorDrawCircle(const point Centre, const uint8_t Radius, const uint16_t Colour);
 
 //====================
