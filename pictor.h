@@ -5,7 +5,7 @@
  *	Note that this code is subject to change, check the changelog when updating.
  *	Project by Henry Wilson, Terra Barber, Emma Curati-Alasonatti and Chris Turner.
  *
- *	This work is licenced under the Creative Commons Attribution-ShareAlike 3.0 licence
+ *	This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 licence
  *	This licence can be found at http://creativecommons.org/licenses/
  */
 
@@ -26,7 +26,7 @@
 //	AVR libraries
 #include <avr/io.h>
 //#include <avr/interrupt.h>
-#include <util/delay.h>//needed for scrreen initaliseation
+#include <util/delay.h>//needed for screen initialisation
 #include <avr/pgmspace.h> //TODO: Work out where this really should go...
 
 //	POINT STRUCTURE	TODO: Look into signed mode.
@@ -95,7 +95,7 @@ uint16_t encode656Colour(const uint8_t Red, const uint8_t Green, const uint8_t B
 inline void pictorCmdWrite(const uint8_t Cmd);
 //	Sends a data byte to the screen.
 inline void pictorByteWrite(const uint8_t Data);
-//	Sends two data bytes to the srceen.
+//	Sends two data bytes to the screen.
 inline void pictorWordWrite(uint16_t Value);
 //	Returns a data byte read from the screen.
 inline uint8_t pictorByteRead();
