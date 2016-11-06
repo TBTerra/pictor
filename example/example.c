@@ -1,9 +1,9 @@
 #define PICTOR_FASTMODE
 #include <avr/io.h>
 
-#include "pictor.h"
-#include "OryxB.h"
-#include "Mash.h"
+#include "../pictor.h"
+#include "../fonts/OryxB.h"
+#include "../fonts/Mash.h"
 #include "sprite_ghost.h"
 #include "sprite_check.h"
 

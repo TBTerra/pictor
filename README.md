@@ -1,4 +1,4 @@
-# Pictor 0.3.1
+# Pictor 0.3.1b
 ### Graphics library for the Il Matto Board with attached screen
 
 #### Warning: pictor 0.3.0 and onwards is not backwards compatible with earlier pictors due to re-worked function names
@@ -13,4 +13,4 @@ It is now on the internet for current and future students to use and possibly ev
 
 The library can be used by simply including pictor.h and any font files you wish to use, pictor.h automatically includes pictor.c so no special compile arguments are needed
 
-Usage of the functions is best seen by looking at the example program, which also comes with pre-compiled .hex (compiled with version 0.3.0 of the library)
+Usage of the functions is best seen by looking at the example program, which also comes with pre-compiled .hex (compiled with version 0.3.1b of the library)
