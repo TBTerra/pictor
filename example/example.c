@@ -11,7 +11,7 @@
 In this example a selection of draw functions are demonstrated and the on board LED is lit for the duration of the initial screen drawing process
 */
 
-static const unsigned char text1[] PROGMEM = "Pictor - ILI9341 driver V0.3.1b";
+static const unsigned char text1[] PROGMEM = "Pictor - ILI9341 driver V0.3.2";
 //this text is stored entirely in program memory, useful for long strings that won't change
 //it is also useful if the same string is used many times in the code, to declare the string once at the beginning rather than every time it is used
 //this means that it is only in the code once, rather than once for every time it is used
