@@ -39,13 +39,13 @@ int main() {
 		}
 	}
 	//	Draw sprites
-	pictorDrawSprite(&pacman, (point){0, 152}, 1);
-	pictorDrawSprite(&pacman, (point){0, 168}, 1);
+	pictorDrawSprite(&ghost, (point){0, 152}, 1);
+	pictorDrawSprite(&ghost, (point){0, 168}, 1);
 	//draw parts of sprite
-	pictorDrawSpritePartial(&pacman, (point){0, 184}, 1, (point){0,0}, (point){7,7});
-	pictorDrawSpritePartial(&pacman, (point){16, 184}, 1, (point){8,0}, (point){15,7});
-	pictorDrawSpritePartial(&pacman, (point){0, 200}, 1, (point){0,8}, (point){7,15});
-	pictorDrawSpritePartial(&pacman, (point){16, 200}, 1, (point){8,8}, (point){15,15});
+	pictorDrawSpritePartial(&ghost, (point){0, 184}, 1, (point){0,0}, (point){7,7});
+	pictorDrawSpritePartial(&ghost, (point){16, 184}, 1, (point){8,0}, (point){15,7});
+	pictorDrawSpritePartial(&ghost, (point){0, 200}, 1, (point){0,8}, (point){7,15});
+	pictorDrawSpritePartial(&ghost, (point){16, 200}, 1, (point){8,8}, (point){15,15});
 	//	Draw scaled sprites
 	J = 16;
 	for (I = 2; I <= 32; I <<= 1) {
@@ -56,11 +56,11 @@ int main() {
 		}
 		J += I;
 	}
-	pictorDrawSprite(&pacman, (point){80, 152}, 2);
+	pictorDrawSprite(&ghost, (point){80, 152}, 2);
 	//draw parts of scaled sprites
 	for(I=0;I<4;I++){
 		for(J=0;J<4;J++){
-			pictorDrawSpritePartial(&pacman, (point){128+(I*18),88+(J*18)}, 4, (point){I*4,J*4}, (point){(I*4)+3,(J*4)+3});
+			pictorDrawSpritePartial(&ghost, (point){128+(I*18),88+(J*18)}, 4, (point){I*4,J*4}, (point){(I*4)+3,(J*4)+3});
 		}
 	}
 	//draw scaled text
