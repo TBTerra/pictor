@@ -71,10 +71,10 @@ int main() {
 	pictorDrawS("Last Modified:", (point){0, 231}, MAGENTA, BLACK, Mash,1);
 	pictorDrawS(__TIMESTAMP__, (point){120, 231}, MAGENTA, BLACK, Mash,1);
 	PORTB &= ~_BV(PB7);
-	I=0;
+	int16_t M=0;
 	while(1){
-		pictorDrawD(I, (point){128,178}, CYAN, BLACK, Mash, 4, 3);
-		I++;
+		pictorDrawD(M, (point){128,178}, CYAN, BLACK, Mash, 4, 6);
+		M++;
 	}
 	return 1;
 }
