@@ -1,4 +1,4 @@
-/*	Pictor.h	VERSION 0.3.1
+/*	Pictor.h	VERSION 0.3.1b
  *	Screen driver for the IlMatto and 2.2" screen combo
  *	Use port A for control & port C for data.
  *

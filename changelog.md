@@ -11,7 +11,7 @@
 * \+ Added LCD_FASTMODE, use #define LCD_FASTMODE to switch to alternate versions of functions that are 20-40% faster, but use use much more program memory
 * \+ Added sprite data type
 * \+ Allowed reassigning of the IO ports.
-* \+ Added lcdDrawAll() to fill the screen with a Colour.
+* \+ Added lcdDrawAll() to fill the screen with a colour
 * ~ Changed sprite drawing to use sprite type
 * ~ Made code conform to style guide
 * \! Spotted bug in lcdDrawLine that prevents it from drawing lines between 
@@ -90,3 +90,9 @@
 ### 0.3.1
 * \+ Added back in pictorWrite (accidentally removed in 0.3.0)
 * ~ Updated pictorDrawCircle description to better represent functionality
+* \+ Added documentation of functions in doc.txt
+* ~ Minor text fixes
+
+### 0.3.1b
+* ~ Changed example.c to include pictor.h and the fonts in place
+* ~ Recompiled example.c with version 0.3.1b

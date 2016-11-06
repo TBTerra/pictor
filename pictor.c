@@ -268,7 +268,7 @@ void pictorRepeatedWordWrite(const uint8_t Cmd, const uint16_t Data, uint16_t Co
 
 void pictorWrite(const uint8_t Cmd, const uint8_t * Buffer, const uint8_t Count){
 	pictorCmdWrite(Cmd);
-	pictorArrayWrite(Data,Count);
+	pictorArrayWrite(Buffer,Count);
 }
 
 void pictorRead(const uint8_t Cmd, uint8_t * Buffer, const uint8_t Count) {
