@@ -7,7 +7,11 @@
 #include "sprite_ghost.h"
 #include "sprite_check.h"
 
-static const unsigned char text1[] PROGMEM = "Pictor - ILI9341 driver V0.3.0";
+/*
+In this example a selection of draw functions are demonstrated and the on board LED is lit for the duration of the screen drawing process
+*/
+
+static const unsigned char text1[] PROGMEM = "Pictor - ILI9341 driver V0.3.1b";
 //this text is stored entirely in program memory, useful for long strings that won't change
 //it is also useful if the same string is used many times in the code, to declare the string once at the beginning rather than every time it is used
 //this means that it is only in the code once, rather than once for every time it is used
@@ -15,6 +19,7 @@ static const unsigned char text1[] PROGMEM = "Pictor - ILI9341 driver V0.3.0";
 int main() {
 	DDRB |= _BV(PB7);
 	pictorInit(0);
+	PORTB |= _BV(PB7);
 	pictorSetRotation(1);
 	//	Welcome
 	pictorDrawSP(text1, ORIGIN, RED, BLACK, Mash,1);
@@ -60,11 +65,10 @@ int main() {
 	}
 	//draw scaled text
 	pictorDrawS("Hello world", (point){128,8}, WHITE, BLACK, Mash,2);
-	pictorDrawS("Game", (point){128,24}, RED, BLACK, Mash,4);
-	pictorDrawS("Over", (point){128,56}, RED, BLACK, Mash,4);
+	pictorDrawS("Game\nOver", (point){128,24}, RED, BLACK, Mash,4);
 	//	Complete
-	pictorDrawS(text1, ORIGIN, GREEN, BLACK, Mash,1);
-	PORTB |= _BV(PB7);
+	pictorDrawSP(text1, ORIGIN, GREEN, BLACK, Mash,1);
+	PORTB &= ~_BV(PB7);
 	while(1);
 	return 1;
 }
