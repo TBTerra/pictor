@@ -454,8 +454,8 @@ void pictorDrawAll(const uint16_t Colour) {
 	}else{//screen vertical
 		pictorCanvasSet((point){0,0}, (point){239,319});
 	}
-	pictorRepeatedWordWrite(0x2C,Colour,40000);
-	pictorRepeatedWordWrite(0x3C,Colour,36800);
+	pictorRepeatedWordWrite(0x2C,Colour,32768);
+	pictorRepeatedWordWrite(0x3C,Colour,44032);
 }
 
 void pictorDrawSprite_(const sprite * Sprite, const point Pos) {
@@ -490,7 +490,7 @@ void pictorDrawSprite(const sprite * Sprite, const point Pos, const uint8_t Scal
 				}
 				rgb+=2;
 			}
-		if (I.X && J.Y) {rgb -= k;}
+		if (J.Y) {rgb -= k;}
 		}
 	}
 }
