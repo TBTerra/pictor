@@ -1,4 +1,4 @@
-static const sprite pacman = {
+static const sprite ghost = {
 {16, 16}, {
 GREEN,		BLACK,		BLACK,		BLACK,		BLACK,		BLACK,		BLACK,		BLACK,		BLACK,		BLACK,		BLACK,		BLACK,		BLACK,		BLACK,		BLACK,		GREEN,		
 BLACK,		BLACK,		BLACK,		BLACK,		BLACK,		BLACK,		RED,		RED,		RED,		RED,		BLACK,		BLACK,		BLACK,		BLACK,		BLACK,		BLACK,

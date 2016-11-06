@@ -56,7 +56,7 @@ void pictorBacklightState(const int8_t State) {
 //===============
 // LCD BULK CMDS
 //===============
-void pictorArrayWrite(const uint8_t * Data, const uint16_t Count){
+void pictorArrayWrite(const uint8_t* Data, const uint16_t Count){
 #ifndef PICTOR_FASTMODE
 	uint16_t I = 0;
 	while (I < Count) {
@@ -110,7 +110,7 @@ void pictorArrayWrite(const uint8_t * Data, const uint16_t Count){
 #endif
 }
 
-void pictorWordArrayWrite(const uint8_t Cmd, const uint16_t * Data, const uint16_t Count) {
+void pictorWordArrayWrite(const uint8_t Cmd, const uint16_t* Data, const uint16_t Count) {
 #ifndef PICTOR_FASTMODE	
 	uint8_t I = 0;
 	pictorCmdWrite(Cmd);
@@ -118,7 +118,7 @@ void pictorWordArrayWrite(const uint8_t Cmd, const uint16_t * Data, const uint16
 		pictorWordWrite( Data[I++] );
 	}
 #else
-	const uint8_t * Byte = (uint8_t *)Data;
+	const uint8_t* Byte = (uint8_t*)Data;
 	pictorCmdWrite(Cmd);
 	uint8_t I; // std name
 	uint8_t HighCount = (uint8_t)(Count >> 8);
@@ -266,12 +266,12 @@ void pictorRepeatedWordWrite(const uint8_t Cmd, const uint16_t Data, uint16_t Co
 #endif
 }
 
-void pictorWrite(const uint8_t Cmd, const uint8_t * Buffer, const uint8_t Count){
+void pictorWrite(const uint8_t Cmd, const uint8_t* Buffer, const uint8_t Count){
 	pictorCmdWrite(Cmd);
 	pictorArrayWrite(Buffer,Count);
 }
 
-void pictorRead(const uint8_t Cmd, uint8_t * Buffer, const uint8_t Count) {
+void pictorRead(const uint8_t Cmd, uint8_t* Buffer, const uint8_t Count) {
 	uint8_t I = 0;
 	pictorCmdWrite(Cmd);
 	DATAPORT  =  0x00;
@@ -318,9 +318,9 @@ void pictorSetRotation(const uint8_t rotation){
 //=========================
 // LCD DRAW CHAR FUNCTIONS
 //=========================
-void pictorDrawC(const unsigned char Char, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const uint8_t * Font, uint8_t scale){
+void pictorDrawC(const unsigned char Char, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const uint8_t* Font, uint8_t scale){
 	if (Char < PICTOR_FONTSTART || Char > PICTOR_FONTEND) return;
-	const uint8_t * fdata;
+	const uint8_t* fdata;
 	uint8_t bits, mask, I, J;
 	uint8_t k, l;
 	uint8_t HighFCol = (uint8_t)(ForegroundColour >> 8), LowFCol = (uint8_t)(ForegroundColour & 0xFF);//added for opti, standardised name
@@ -347,7 +347,7 @@ void pictorDrawC(const unsigned char Char, const point Pos, const uint16_t Foreg
 	}
 }
 
-uint8_t pictorDrawS(const unsigned char * Buffer, point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font * Font, uint8_t scale) {
+uint8_t pictorDrawS(const unsigned char* Buffer, point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale) {
 	uint8_t i = 0;
 	point X1 = Pos;
 	while (Buffer[i]) {
@@ -364,7 +364,7 @@ uint8_t pictorDrawS(const unsigned char * Buffer, point Pos, const uint16_t Fore
 }
 
 
-uint8_t pictorDrawSP(const unsigned char * Buffer, point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font * Font, uint8_t scale) {
+uint8_t pictorDrawSP(const unsigned char* Buffer, point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale) {
 	uint8_t i = 0;
 	unsigned char dat;
 	point X1 = Pos;
@@ -385,28 +385,31 @@ uint8_t pictorDrawSP(const unsigned char * Buffer, point Pos, const uint16_t For
 // LCD DRAW Number FUNCTIONS
 //=========================
 //low level special case for unpadded number draw
-uint8_t pictorDrawD_(const int Number, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font * Font, uint8_t scale) {
-	char NumberString[11];
+uint8_t pictorDrawD_(const int16_t Number, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale) {
+	char NumberString[7];
 	itoa(Number, NumberString, 10);
 	return pictorDrawS((unsigned char*)NumberString, Pos, ForegroundColour, BackgroundColour, Font, scale);
 }
 
-void pictorDrawD(const int Number, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font * Font, uint8_t scale, uint8_t len) {
+void pictorDrawD(const int16_t Number, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale, uint8_t len) {
 	if(!len){
 		pictorDrawD_(Number, Pos, ForegroundColour, BackgroundColour, Font, scale);
 	}
-	char NumberString[11];
+	point Pos2 = Pos;
+	char NumberString[7];
 	itoa(Number, NumberString, 10);
 	uint8_t i = 0;
 	while(NumberString[i])i++;
 	while(i<len){
-		pictorDrawC(32, Pos, ForegroundColour, BackgroundColour, Font, scale);
+	
+		pictorDrawC(32, Pos2, ForegroundColour, BackgroundColour, Font, scale);
+		Pos2.X += scale*8;
 		i++;
 	}
-	pictorDrawS((unsigned char*)NumberString, Pos, ForegroundColour, BackgroundColour, Font, scale);
+	pictorDrawS((unsigned char*)NumberString, Pos2, ForegroundColour, BackgroundColour, Font, scale);
 }
 
-uint8_t pictorDrawX(const uint8_t Value, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font * Font, uint8_t scale) {
+uint8_t pictorDrawX(const uint8_t Value, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale) {
 	uint8_t c1=Value&0x0F,c2=(Value&0xF0)>>4;//load initial two values(0-15)
 	c1=(c1>=10)?(c1+55):(c1+48);
 	c2=(c2>=10)?(c2+55):(c2+48);//convert to characters
@@ -439,7 +442,7 @@ void pictorDrawBox(point A, point B, const uint16_t Colour) {
 	pictorCanvasSet(A, B);
 	D.X = B.X - A.X + 1;
 	D.Y = B.Y - A.Y + 1;
-	uint32_t Pixels = (long)D.X * (long)D.Y;	//	TODO: Optimise this
+	uint32_t Pixels = (uint32_t)D.X * (uint32_t)D.Y;	//	TODO: Optimise this
 	if (Pixels > 0xFFFF) {
 		pictorRepeatedWordWrite(0x2C, Colour, ((uint16_t)Pixels) + 1);
 		pictorRepeatedWordWrite(0x3C, Colour, 0xFFFF);
@@ -454,11 +457,11 @@ void pictorDrawAll(const uint16_t Colour) {
 	}else{//screen vertical
 		pictorCanvasSet((point){0,0}, (point){239,319});
 	}
-	pictorRepeatedWordWrite(0x2C,Colour,40000);
-	pictorRepeatedWordWrite(0x3C,Colour,36800);
+	pictorRepeatedWordWrite(0x2C,Colour,32768);
+	pictorRepeatedWordWrite(0x3C,Colour,44032);
 }
 
-void pictorDrawSprite_(const sprite * Sprite, const point Pos) {
+void pictorDrawSprite_(const sprite* Sprite, const point Pos) {
 	uint16_t Pixel = 0;
 	point I = Sprite->Size;
 	pictorCanvasSet(Pos, (point){Pos.X+I.X-1,Pos.Y+I.Y-1});
@@ -466,7 +469,7 @@ void pictorDrawSprite_(const sprite * Sprite, const point Pos) {
 	pictorWordArrayWrite(0x2C,(uint16_t*)Sprite->RGB,Pixel);
 }
 
-void pictorDrawSprite(const sprite * Sprite, const point Pos, const uint8_t Scale) {
+void pictorDrawSprite(const sprite* Sprite, const point Pos, const uint8_t Scale) {
 	if (Scale == 1) {
 		pictorDrawSprite_(Sprite, Pos);
 		return;
@@ -490,12 +493,12 @@ void pictorDrawSprite(const sprite * Sprite, const point Pos, const uint8_t Scal
 				}
 				rgb+=2;
 			}
-		if (I.X && J.Y) {rgb -= k;}
+		if (J.Y) {rgb -= k;}
 		}
 	}
 }
 
-void pictorDrawSpritePartial_(const sprite * Sprite, const point Pos, point X1, point X2){
+void pictorDrawSpritePartial_(const sprite* Sprite, const point Pos, point X1, point X2){
 	uint8_t x = X2.X-X1.X;
 	uint8_t y = X2.Y-X1.Y;
 	uint8_t * rgb;
@@ -519,14 +522,14 @@ void pictorDrawSpritePartial_(const sprite * Sprite, const point Pos, point X1, 
 	}
 }
 
-void pictorDrawSpritePartial(const sprite * Sprite, const point Pos, const uint8_t Scale, point X1, point X2){
+void pictorDrawSpritePartial(const sprite* Sprite, const point Pos, const uint8_t Scale, point X1, point X2){
 	if (Scale == 1) {
 		pictorDrawSpritePartial_(Sprite, Pos, X1, X2);
 		return;
 	}
 	uint8_t x = X2.X-X1.X;
 	uint8_t y = X2.Y-X1.Y;
-	uint8_t * rgb;
+	uint8_t* rgb;
 	uint8_t i;
 	uint8_t a,b,c=Sprite->Size.X*2,d=2*(x+1);
 	pictorCanvasSet(Pos, (point){Pos.X+((x+1)*Scale)-1,Pos.Y+((y+1)*Scale)-1});
@@ -682,7 +685,7 @@ void pictorMemDump(){
 	pictorCanvasSet((point){0,0}, (point){15,127});
 	pictorWordArrayWrite(0x2C,(uint16_t*)0,2048);//draw the entire of memory as pixels
 	uint16_t i, data;
-	const uint8_t * ptr;
+	const uint8_t* ptr;
 	pictorCanvasSet((point){32,0}, (point){160,255});
 	pictorCmdWrite(0x2C);
 	for(i=0,ptr=0;i<32768;i++,ptr+=2){//draw the entire of program memory as pixels

@@ -96,3 +96,10 @@
 ### 0.3.1b
 * ~ Changed example.c to include pictor.h and the fonts in place
 * ~ Recompiled example.c with version 0.3.1b
+
+### 0.3.2
+* \+ Added number drawing function to example.c
+* ~ Changed LED function in example.c to demonstrate the speed of the draw functions
+* ~ Renamed pacman to ghost in sprite_ghost.h
+* ~ Fixed padding in pictorDrawD()
+* ~ First pass for standardising the formatting throughout pictor

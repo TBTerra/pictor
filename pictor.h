@@ -1,4 +1,4 @@
-/*	Pictor.h	VERSION 0.3.1b
+/*	Pictor.h	VERSION 0.3.2
  *	Screen driver for the IlMatto and 2.2" screen combo
  *	Use port A for control & port C for data.
  *
@@ -66,7 +66,7 @@ static uint8_t pictorRot = 0;
 //	POINTS
 #define ORIGIN		(point){0,	0}
 #define UNIT_POINT	(point){1,	1}
-#define PICTOR_MAX		(point){239,319}
+#define PICTOR_MAX	(point){239,319}
 #define PICTOR_SIZE	(point){240,320}
 
 //	COLOURS		  RRRRRGGGGGGBBBBB
@@ -108,9 +108,9 @@ void pictorBacklightState(const int8_t State);
 // LCD ARRAY CMDS
 //================
 //	Writes a command and a byte array containing its parameters to the screen.
-void pictorWrite(const uint8_t Cmd, const uint8_t * Buffer, const uint8_t Count);
+void pictorWrite(const uint8_t Cmd, const uint8_t* Buffer, const uint8_t Count);
 //	Writes a command and reads out an array of byte data into a buffer from the screen.
-void pictorRead(const uint8_t Cmd, uint8_t * Buffer, const uint8_t Count);
+void pictorRead(const uint8_t Cmd, uint8_t* Buffer, const uint8_t Count);
 
 //====================
 // LCD COMPOSITE CMDS
@@ -123,18 +123,18 @@ void pictorSetRotation(const uint8_t rotation);
 // LCD DRAW CHAR FUNCTIONS
 //=========================
 //	Draws Char onto the screen at Pos with two colours of Font.
-void pictorDrawC(const unsigned char Char, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font * Font, uint8_t scale);
+void pictorDrawC(const unsigned char Char, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale);
 //	Draws String onto the screen at Pos with two colours of Font.
-uint8_t pictorDrawS(const unsigned char * Buffer, point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font * Font, uint8_t scale);
-uint8_t pictorDrawSP(const unsigned char * Buffer, point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font * Font, uint8_t scale);
+uint8_t pictorDrawS(const unsigned char* Buffer, point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale);
+uint8_t pictorDrawSP(const unsigned char* Buffer, point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale);
 
 //=========================
 // LCD DRAW Number FUNCTIONS
 //=========================
 //	Draws a Number in decimal onto the screen at Pos, with two colours of Font, padded to fill len spaces(use a len of 0 to ignore padding).
-void pictorDrawD(const int Number, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font * Font, uint8_t scale, uint8_t len);
+void pictorDrawD(const int16_t Number, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale, uint8_t len);
 //	Draws a Value in hex onto the screen at Pos with two colours of Font.
-uint8_t pictorDrawX(const uint8_t Value, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font * Font, uint8_t scale);
+uint8_t pictorDrawX(const uint8_t Value, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale);
 
 //=================
 // LCD DRAW SHAPES
@@ -146,9 +146,9 @@ void pictorDrawBox(point A, point B, const uint16_t Colour);
 //	Fills the screen with Colour.
 void pictorDrawAll(const uint16_t Colour);
 //	Draws a Sprite top left aligned at Pos scaled by Scale.
-void pictorDrawSprite(const sprite * Sprite, const point Pos, const uint8_t Scale);
+void pictorDrawSprite(const sprite* Sprite, const point Pos, const uint8_t Scale);
 //draw part of a sprite selected by X1 and X2
-void pictorDrawSpritePartial(const sprite * Sprite, const point Pos, const uint8_t Scale, point X1, point X2);
+void pictorDrawSpritePartial(const sprite* Sprite, const point Pos, const uint8_t Scale, point X1, point X2);
 //	Draws a circle using Bresenham's algorithm with a given centre point and radius
 void pictorDrawCircle(const point Centre, const uint8_t Radius, const uint16_t Colour);
 

@@ -120,7 +120,7 @@ uint8_t pictorDrawSP(const unsigned char * Buffer, point Pos, const uint16_t For
 =========================
  LCD DRAW Number FUNCTIONS
 =========================
-void pictorDrawD(const int Number, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font * Font, uint8_t scale, uint8_t len);
+void pictorDrawD(const int16_t Number, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font * Font, uint8_t scale, uint8_t len);
 	Draws a number in decimal onto the screen at the specified position with a set font, and foreground and background colours.
 	The number is padded to fill the specified length using spaces, use a length of 0 to ignore padding.
 	Parameters:
