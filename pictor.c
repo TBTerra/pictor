@@ -10,7 +10,7 @@ uint16_t encode656Colour(const uint8_t Red, const uint8_t Green, const uint8_t B
 }
 
 //===============
-// BASE LCD CMDS (now with weird inline stile define bassed functions)
+// BASE LCD CMDS (now with weird inline style define based functions)
 //===============
 inline void pictorCmdWrite(const uint8_t Cmd) {
 	CTRLPORT &=  COMND;
@@ -69,7 +69,7 @@ void pictorArrayWrite(const uint8_t * Data, const uint16_t Count){
 	uint16_t Index = 0;
 	while (HighCount--) { // moved from for loops to while loops
 		I = 17;
-		while (--I) {//moved from post decrement to pre decrement (because somehow its faster)
+		while (--I) {//moved from post-decrement to pre-decrement (because somehow it's faster)
 			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
 			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
 			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
@@ -173,7 +173,7 @@ void pictorRepeatedByteWrite(const uint8_t Cmd, const uint8_t Data, uint16_t Cou
 #ifndef PICTOR_FASTMODE
 	pictorCmdWrite(Cmd);
 	Count++;
-	while (--Count) { // moved for loops to while loops(using predecrements rather than post decrements
+	while (--Count) { // moved from for loops to while loops(using pre-decrements rather than post-decrements)
 		pictorByteWrite(Data);
 	}
 #else
@@ -223,9 +223,9 @@ void pictorRepeatedWordWrite(const uint8_t Cmd, const uint16_t Data, uint16_t Co
 	uint8_t HighCount = (uint8_t)(Count >> 8),			LowCount = (uint8_t)Count & 0xFF;//std name
 	uint8_t HighByte = (uint8_t)(Data >> 8),	LowByte = (uint8_t)(Data) & 0xFF;//added for opti, optimised brackets & std name
 	pictorCmdWrite(Cmd);
-	while (HighCount--) { // moved for loops to while loops
+	while (HighCount--) { // moved from for loops to while loops
 		I = 17;
-		while (--I) { // 16x16 is using a fair bit of memory(predecrement rather than postdecrement)
+		while (--I) { // 16x16 is using a fair bit of memory(pre-decrement rather than post-decrement)
 			DATAPORT  =  HighByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
 			DATAPORT  =  LowByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
 			DATAPORT  =  HighByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
@@ -329,9 +329,9 @@ void pictorDrawC(const unsigned char Char, const point Pos, const uint16_t Foreg
 	pictorCanvasSet(Pos, Pos2);
 	fdata = (Char - PICTOR_FONTSTART)*8 + Font;
 	pictorCmdWrite(0x2C); // Memory Write
-	for (I = 0; I < 8; I++) {//draw hoisontal line
+	for (I = 0; I < 8; I++) {//draw horizontal line
 		bits = pgm_read_byte(fdata++);
-		for(k = 0;k<scale;k++){//draw repeated horisontal line for scale factor
+		for(k = 0;k<scale;k++){//draw repeated horizontal line for scale factor
 			for (J = 0, mask=0x80; J < 8; J++, mask>>=1) {//draw each pixel on line
 				for(l = 0;l<scale;l++){//draw repeats for scale
 					if(bits & mask){
@@ -407,7 +407,7 @@ void pictorDrawD(const int Number, const point Pos, const uint16_t ForegroundCol
 }
 
 uint8_t pictorDrawX(const uint8_t Value, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font * Font, uint8_t scale) {
-	uint8_t c1=Value&0x0F,c2=(Value&0xF0)>>4;//load inital two values(0-15)
+	uint8_t c1=Value&0x0F,c2=(Value&0xF0)>>4;//load initial two values(0-15)
 	c1=(c1>=10)?(c1+55):(c1+48);
 	c2=(c2>=10)?(c2+55):(c2+48);//convert to characters
 	pictorDrawC(c2, Pos, ForegroundColour, BackgroundColour, Font, scale);
@@ -449,7 +449,7 @@ void pictorDrawBox(point A, point B, const uint16_t Colour) {
 }
 
 void pictorDrawAll(const uint16_t Colour) {
-	if(pictorRot%2){//screen horisontal
+	if(pictorRot%2){//screen horizontal
 		pictorCanvasSet((point){0,0}, (point){319,239});
 	}else{//screen vertical
 		pictorCanvasSet((point){0,0}, (point){239,319});
@@ -501,7 +501,7 @@ void pictorDrawSpritePartial_(const sprite * Sprite, const point Pos, point X1, 
 	uint8_t * rgb;
 	uint8_t i;
 	pictorCanvasSet(Pos, (point){Pos.X+x,Pos.Y+y});
-	if((x+1)>=(uint8_t)Sprite->Size.X){//same width just changed hight
+	if((x+1)>=(uint8_t)Sprite->Size.X){//same width just changed height
 		pictorWordArrayWrite(0x2C,((uint16_t*)Sprite->RGB)+((x+1)*X1.Y),(x+1)*(y+1));
 	}else{
 		rgb = (uint8_t*)((uint16_t*)((Sprite->RGB)+(Sprite->Size.X*X1.Y)+X1.X));//starting location
@@ -509,7 +509,7 @@ void pictorDrawSpritePartial_(const sprite * Sprite, const point Pos, point X1, 
 		pictorCmdWrite(0x2C);
 		while(--y){//loop through rows
 			i=x+2;
-			while(--i){//loop through colums
+			while(--i){//loop through columns
 					pictorByteWrite( *(rgb+1) );
 					pictorByteWrite( *rgb );
 					rgb+=2;
@@ -538,7 +538,7 @@ void pictorDrawSpritePartial(const sprite * Sprite, const point Pos, const uint8
 		a=Scale;
 		while(a--){
 			i=x+2;
-			while(--i){//loop through colums
+			while(--i){//loop through columns
 					b = Scale;
 					while(b--){
 						pictorByteWrite( *(rgb+1) );
