@@ -395,15 +395,18 @@ void pictorDrawD(const int Number, const point Pos, const uint16_t ForegroundCol
 	if(!len){
 		pictorDrawD_(Number, Pos, ForegroundColour, BackgroundColour, Font, scale);
 	}
+	point Pos2 = Pos;
 	char NumberString[11];
 	itoa(Number, NumberString, 10);
 	uint8_t i = 0;
 	while(NumberString[i])i++;
 	while(i<len){
-		pictorDrawC(32, Pos, ForegroundColour, BackgroundColour, Font, scale);
+	
+		pictorDrawC(32, Pos2, ForegroundColour, BackgroundColour, Font, scale);
+		Pos2.X += scale*8;
 		i++;
 	}
-	pictorDrawS((unsigned char*)NumberString, Pos, ForegroundColour, BackgroundColour, Font, scale);
+	pictorDrawS((unsigned char*)NumberString, Pos2, ForegroundColour, BackgroundColour, Font, scale);
 }
 
 uint8_t pictorDrawX(const uint8_t Value, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font * Font, uint8_t scale) {

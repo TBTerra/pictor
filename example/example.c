@@ -8,7 +8,7 @@
 #include "sprite_check.h"
 
 /*
-In this example a selection of draw functions are demonstrated and the on board LED is lit for the duration of the screen drawing process
+In this example a selection of draw functions are demonstrated and the on board LED is lit for the duration of the initial screen drawing process
 */
 
 static const unsigned char text1[] PROGMEM = "Pictor - ILI9341 driver V0.3.1b";
@@ -68,7 +68,13 @@ int main() {
 	pictorDrawS("Game\nOver", (point){128,24}, RED, BLACK, Mash,4);
 	//	Complete
 	pictorDrawSP(text1, ORIGIN, GREEN, BLACK, Mash,1);
+	pictorDrawS("Last Modified:", (point){0, 231}, MAGENTA, BLACK, Mash,1);
+	pictorDrawS(__TIMESTAMP__, (point){120, 231}, MAGENTA, BLACK, Mash,1);
 	PORTB &= ~_BV(PB7);
-	while(1);
+	I=0;
+	while(1){
+		pictorDrawD(I, (point){128,178}, CYAN, BLACK, Mash, 4, 3);
+		I++;
+	}
 	return 1;
 }
