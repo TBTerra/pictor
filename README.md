@@ -1,4 +1,4 @@
-# Pictor 0.3.1b
+# Pictor 0.3.2
 ### Graphics library for the Il Matto Board with attached screen
 
 #### Warning: pictor 0.3.2 and onwards is not backwards compatible with earlier pictors due to re-worked function names
