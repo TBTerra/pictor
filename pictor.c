@@ -53,6 +53,11 @@ void pictorBacklightState(const int8_t State) {
 	}
 }
 
+void pictorFrame() {
+	CTRLPORT &= ~VSYNC;
+	CTRLPORT |= VSYNC;
+}
+
 //===============
 // LCD BULK CMDS
 //===============
@@ -658,7 +663,11 @@ void pictorInit(const uint8_t Mode) {
 	pictorCmdWrite(0xF6);
 	pictorByteWrite(0x01);
 	pictorByteWrite(0x00);
-	pictorByteWrite(0x00);
+	if(Mode & _BV(0)) {//modes with _BV(0) are VSYNC modes
+		pictorByteWrite(0x08);
+	} else {
+		pictorByteWrite(0x00);
+	}
 	pictorCmdWrite(0xF2);
 	pictorByteWrite(0x00);
 	pictorCmdWrite(0x26);

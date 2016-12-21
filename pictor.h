@@ -57,6 +57,7 @@ static uint8_t pictorRot = 0;
 #define WRITE		0b11110111
 #define COMND		0b11101111
 #define READ		0b11011111
+#define VSYNC		0b01000000
 
 //	USEFUL
 #define ON			1
@@ -103,6 +104,8 @@ inline uint8_t pictorByteRead();
 inline uint16_t pictorWordRead();
 //	Sets the state of the back-light, 1 = ON, 0 = OFF, -1 = TOGGLE
 void pictorBacklightState(const int8_t State);
+//	Toggles the VSYNC pin to update the screen in VSYNC mode
+void pictorFrame();
 
 //================
 // LCD ARRAY CMDS
@@ -155,7 +158,7 @@ void pictorDrawCircle(const point Centre, const uint8_t Radius, const uint16_t C
 //====================
 // LCD INTITALISATION
 //====================
-//	Initialise the screen. Currently Mode is unused, but will later do stuff (Use 0 for now)
+//	Initialise the screen. Mode is a bit-field.
 void pictorInit(const uint8_t Mode);
 
 // Dump the entire of ram and program memory to the screen
