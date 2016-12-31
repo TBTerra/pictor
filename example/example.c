@@ -39,8 +39,8 @@ int main() {
 		}
 	}
 	//	Draw sprites
-	pictorDrawSprite(&ghost, (point){0, 152}, 1);
-	pictorDrawSprite(&ghost, (point){0, 168}, 1);
+	pictorDrawSpriteType(&ghost, (point){0, 152}, 0, 1);
+	pictorDrawSpriteType(&ghost, (point){0, 168}, 0, 1);
 	//draw parts of sprite
 	pictorDrawSpritePartial(&ghost, (point){0, 184}, 1, (point){0,0}, (point){7,7});
 	pictorDrawSpritePartial(&ghost, (point){16, 184}, 1, (point){8,0}, (point){15,7});
@@ -51,12 +51,12 @@ int main() {
 	for (I = 2; I <= 32; I <<= 1) {
 		L = 152;
 		for (K = 32 / I; K; K--) {
-			pictorDrawSprite(&check, (point){J, L}, I >> 1);
+			pictorDrawSpriteType(&check, (point){J, L}, 0, I >> 1);
 			L += I;
 		}
 		J += I;
 	}
-	pictorDrawSprite(&ghost, (point){80, 152}, 2);
+	pictorDrawSpriteType(&ghost, (point){80, 152}, 0, 2);
 	//draw parts of scaled sprites
 	for(I=0;I<4;I++){
 		for(J=0;J<4;J++){

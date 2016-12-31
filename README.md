@@ -2,6 +2,7 @@
 ### Graphics library for the Il Matto Board with attached screen
 
 #### Warning: pictor 0.3.2 and onwards is not backwards compatible with earlier pictors due to re-worked function names
+#### Warning: pictor 0.3.3 and onwards sprites are not backwards compatible with earlier sprites due to re-worked functions and structures
 
 This was originally written in 2013 by a small group of first year students (Henry Wilson, Terra Barber, Emma Curati-Alasonatti and Chris Turner.), who couldn't wait to be given the official library
 
