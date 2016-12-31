@@ -35,10 +35,26 @@ typedef struct {
 	uint16_t Y;
 } point;
 //	SPRITE STRUCTURE
-typedef struct/*PROGMEM*/ {
-	const point Size; // remember that the size is {X > 0, Y > 0}!
-	const uint16_t RGB[];
-} sprite;
+typedef struct{//Sprite type 0 & 1
+	const point Size;// remember that the size is {X > 0, Y > 0}!
+	uint16_t* RGB; //can be in PROGMEM
+}sprite;
+typedef struct{//Sprite type 2 & 3
+	const point Size;
+	uint8_t* data; //can be in PROGMEM
+	uint16_t FGcolour;
+	uint16_t BGcolour;
+}spriteMono;
+typedef struct{//Sprite type 4, 5, 6 & 7
+	const point Size;
+	uint8_t* data; //can be in PROGMEM
+	uint16_t* palette; //can be in PROGMEM
+}spriteEncoded;
+typedef struct{//Sprite type 8, 9, A & B
+	const point Size;
+	uint8_t* data; //can be in PROGMEM
+	uint16_t* palette; //can be in PROGMEM
+}spritePalette;
 //	FONT STRUCTURE
 #define font uint8_t
 
@@ -145,10 +161,10 @@ void pictorDrawPixel(const point Pos, const uint16_t Colour);
 void pictorDrawBox(point A, point B, const uint16_t Colour);
 //	Fills the screen with Colour.
 void pictorDrawAll(const uint16_t Colour);
-//	Draws a Sprite top left aligned at Pos scaled by Scale.
-void pictorDrawSprite(const sprite* Sprite, const point Pos, const uint8_t Scale);
 //draw part of a sprite selected by X1 and X2
 void pictorDrawSpritePartial(const sprite* Sprite, const point Pos, const uint8_t Scale, point X1, point X2);
+// Draws a Sprite of type Type, top left aligned at Pos scaled by Scale.
+void pictorDrawSpriteType(const void* Sprite, const point Pos, const uint8_t type, const uint8_t Scale);
 //	Draws a circle using Bresenham's algorithm with a given centre point and radius
 void pictorDrawCircle(const point Centre, const uint8_t Radius, const uint16_t Colour);
 
