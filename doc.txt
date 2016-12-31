@@ -44,6 +44,13 @@ void pictorBacklightState(const int8_t State);
 	Parameters:
 		State	Backlight state (1 = ON, 0 = OFF, -1 = TOGGLE).
 
+void pictorFrame();
+	Toggles the VSYNC pin to update the screen in VSYNC mode
+	VSYNC Notes:
+		Exceeding 84Hz will not draw the bottom of the screen replacing it with a white stripe.
+		Refreshing the screen at below 30Hz will cause visible flickering in blocks of colour,
+		And refreshing at below 5Hz will cause the screen to begin to fade to white in between frames.
+
 ================
  LCD ARRAY CMDS
 ================
@@ -199,9 +206,9 @@ void pictorDrawCircle(const point Centre, const uint8_t Radius, const uint16_t C
  LCD INTITALISATION
 ====================
 void pictorInit(const uint8_t Mode);
-	Initialises the screen. Currently Mode is unused, but will later do stuff (Use 0 for now).
+	Initialises the screen. Mode is a bit-field, _BV(0) enables and disables VSYNC, it will do more in the future.
 Parameters:
-		Mode	Mode to initialise the screen in. Currently unused, set to 0 for future compatibility.
+		Mode	Mode to initialise the screen in. Use 0 for regular operation and 1 for VSYNC operation.
 
 void pictorMemDump()
 	Dump the entire of ram and program memory to the screen.
