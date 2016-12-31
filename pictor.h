@@ -141,6 +141,8 @@ uint8_t pictorDrawX(const uint8_t Value, const point Pos, const uint16_t Foregro
 //=================
 //	Draws a single pixel with Colour at Pos
 void pictorDrawPixel(const point Pos, const uint16_t Colour);
+//      Draws a line with Colour between points A and B, using Bresenham's algorithm.
+void pictorDrawLine(point A, point B, const uint16_t Colour);
 //	Draws a solid box with Colour between points A and B.
 void pictorDrawBox(point A, point B, const uint16_t Colour);
 //	Fills the screen with Colour.

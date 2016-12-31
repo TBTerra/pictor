@@ -427,6 +427,56 @@ void pictorDrawPixel(const point Pos, const uint16_t Colour) {
 	pictorWordWrite(Colour);
 }
 
+void pictorDrawLine(point A, point B, const uint16_t Colour) {
+	//Nested function declarations are forbidden in standard C but the avr-gcc compiler allows them.
+	//The swap function swaps the values of int1 and int2; it is only accessible in this block.
+	void swap(uint16_t *int1 , uint16_t *int2) {
+		uint16_t temp;
+		 temp = *int1;
+		*int1 = *int2;
+		*int2 =  temp;
+	}
+	//if the slope is higher than 1
+	//mirror across the diagonal
+	//e.g. increment Y instead of X in the main for loop
+	uint8_t steep = 0;
+	if(abs(A.X - B.X) < abs(A.Y - B.Y)) {
+		swap(&A.X,&A.Y);
+		swap(&B.X,&B.Y);
+		steep = 1;
+	}
+	//if the first point is to the right of the second
+	//swap them
+	if(A.X>B.X) {
+		swap(&A.X,&B.X);
+		swap(&A.Y,&B.Y);
+	}
+	//if the second point is above the first
+	//decrement y, as opposed to increment, in the main for loop
+	int8_t y_inc;
+	if(B.Y>A.Y)
+		y_inc = 1;
+	else
+		y_inc = -1;
+	point Pos; //position of pixel which is drawn each loop
+	int16_t offsetX = abs(B.X - A.X);
+	int16_t offsetY = abs(B.Y - A.Y);
+	int16_t err = 0;
+	for (Pos.X = A.X,Pos.Y = A.Y; Pos.X <= B.X; Pos.X++) {
+		//line is transposed back before being drawn
+		if(steep)
+			pictorDrawPixel( (point) {Pos.Y, Pos.X}, Colour);
+		else
+			pictorDrawPixel(Pos, Colour);
+
+		err += offsetY;
+		if( (err<<1) >= offsetX) {
+			Pos.Y += y_inc;
+			err -= offsetX;
+		}
+	}
+}
+
 void pictorDrawBox(point A, point B, const uint16_t Colour) {
 	point D;
 	if (A.X > B.X) {

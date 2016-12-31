@@ -152,6 +152,13 @@ void pictorDrawPixel(const point Pos, const uint16_t Colour);
 	Parameters:
 		Pos			Point structure to pixel's intended location.
 		Colour		Colour for the pixel as a 656-RGB encoded colour.
+		
+void pictorDrawLine(point A, point B, const uint16_t Colour);
+	Draws a straight line with a specified colour between the points A and B.
+	Parameters:
+		A			Point structure the intended location of an endpoint of the line.
+		B			Point structure the intended location of the other endpoint.
+		Colour		Colour for the area as a 656-RGB encoded colour.
 
 void pictorDrawBox(point A, point B, const uint16_t Colour);
 	Draws a solid box with a specified colour between the points A and B.

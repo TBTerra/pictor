@@ -103,3 +103,6 @@
 * ~ Renamed pacman to ghost in sprite_ghost.h
 * ~ Fixed padding in pictorDrawD()
 * ~ First pass for standardising the formatting throughout pictor
+
+### 0.3.3
+* \+ Added pictorDrawLine function
