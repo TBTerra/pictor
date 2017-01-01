@@ -179,13 +179,6 @@ void pictorDrawAll(const uint16_t Colour);
 	Parameters:
 		Colour		Colour for the screen as a 656-RGB encoded colour.
 
-void pictorDrawSprite(const sprite * Sprite, const point Pos, const uint8_t Scale);
-	Draws a Sprite top left aligned at Pos scaled by Scale.
-	Parameters:
-		Sprite	Pointer to the sprite array to be written to the screen.
-		Pos		Point structure to the top-left corner of the sprite's intended location.
-		Scale	Integer size scale (Note: A scale of 1 produces a pixel to pixel representation of the stored sprite).
-
 void pictorDrawSpritePartial(const sprite * Sprite, const point Pos, const uint8_t Scale, point X1, point X2);
 	Draw part of a sprite selected by X1 and X2.
 	Parameters:
@@ -194,6 +187,27 @@ void pictorDrawSpritePartial(const sprite * Sprite, const point Pos, const uint8
 		Scale	Integer size scale (Note: A scale of 1 produces a pixel to pixel representation of the stored sprite).
 		X1		Point structure between the top-left of the total sprite and the top-left corner to be drawn.
 		X2		Point structure between the top-left of the total sprite and the bottom-right corner to be drawn.
+
+void pictorDrawSprite(const sprite * Sprite, const point Pos, const uint8_t type, const uint8_t Scale);
+	Draws a Sprite of type Type, top left aligned at Pos scaled by Scale.
+	Parameters:
+		Sprite	Pointer to the sprite array to be written to the screen.
+		Pos		Point structure to the top-left corner of the sprite's intended location.
+		type	Integer type number, from the available sprite types.
+		Scale	Integer size scale (Note: A scale of 1 produces a pixel to pixel representation of the stored sprite
+	Sprite types:
+		0. full colour in memory
+		1. full colour in PROGMEM
+		2. 1bit in memory
+		3. 1bit in PROGMEM
+		4. Palette and indexed sprite in memory
+		5. Indexed sprite in PROGMEM, palette in memory
+		6. Indexed sprite in memory, palette in PROGMEM
+		7. Palette and indexed sprite in PROGMEM
+		8. Palette and packed pixels in memory
+		9. Packed pixels in PROGMEM, palette in memory
+		10. Packed pixels in memory, palette in PROGMEM
+		11. Palette and packed pixels in PROGMEM
 
 void pictorDrawCircle(const point Centre, const uint8_t Radius, const uint16_t Colour);
 	Draws a circle using Bresenham's algorithm of the specified colour around a defined centre of the specified radius.

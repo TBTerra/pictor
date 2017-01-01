@@ -389,27 +389,18 @@ uint8_t pictorDrawSP(const unsigned char* Buffer, point Pos, const uint16_t Fore
 //=========================
 // LCD DRAW Number FUNCTIONS
 //=========================
-//low level special case for unpadded number draw
-uint8_t pictorDrawD_(const int16_t Number, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale) {
-	char NumberString[7];
-	itoa(Number, NumberString, 10);
-	return pictorDrawS((unsigned char*)NumberString, Pos, ForegroundColour, BackgroundColour, Font, scale);
-}
-
 void pictorDrawD(const int16_t Number, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale, uint8_t len) {
-	if(!len){
-		pictorDrawD_(Number, Pos, ForegroundColour, BackgroundColour, Font, scale);
-	}
-	point Pos2 = Pos;
 	char NumberString[7];
 	itoa(Number, NumberString, 10);
-	uint8_t i = 0;
-	while(NumberString[i])i++;
-	while(i<len){
-	
-		pictorDrawC(32, Pos2, ForegroundColour, BackgroundColour, Font, scale);
-		Pos2.X += scale*8;
-		i++;
+	point Pos2 = Pos;
+	if(len) {
+		uint8_t i = 0;
+		while(NumberString[i])i++;
+		while(i<len){
+			pictorDrawC(32, Pos2, ForegroundColour, BackgroundColour, Font, scale);
+			Pos2.X += scale*8;
+			i++;
+		}
 	}
 	pictorDrawS((unsigned char*)NumberString, Pos2, ForegroundColour, BackgroundColour, Font, scale);
 }
@@ -419,7 +410,7 @@ uint8_t pictorDrawX(const uint8_t Value, const point Pos, const uint16_t Foregro
 	c1=(c1>=10)?(c1+55):(c1+48);
 	c2=(c2>=10)?(c2+55):(c2+48);//convert to characters
 	pictorDrawC(c2, Pos, ForegroundColour, BackgroundColour, Font, scale);
-	pictorDrawC(c1, (point){Pos.X+8,Pos.Y}, ForegroundColour, BackgroundColour, Font, scale);
+	pictorDrawC(c1, (point){Pos.X+8*scale,Pos.Y}, ForegroundColour, BackgroundColour, Font, scale);
 	return 2;
 }
 
