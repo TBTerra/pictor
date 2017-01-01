@@ -106,3 +106,20 @@
 
 ### 0.3.3
 * \+ Added pictorDrawLine function
+* \+ Added 12 new types of sprite.
+  * 0 - full colour in memory 
+  * 1 - full colour in PROGMEM 
+  * 2 - 1bit in memory 
+  * 3 - 1bit in PROGMEM 
+  * 4 - Palette and indexed sprite in memory 
+  * 5 - Indexed sprite in PROGMEM, palette in memory 
+  * 6 - Indexed sprite in memory, palette in PROGMEM 
+  * 7 - Palette and indexed sprite in PROGMEM 
+  * 8 - Palette and packed pixels in memory
+  * 9 - Packed pixels in PROGMEM, palette in memory
+  * 10 - Packed pixels in memory, palette in PROGMEM
+  * 11 - Palette and packed pixels in PROGMEM
+* ~ Changed sprite drawing to the pictorDrawSpriteType() function, which adds functionality for 8 types of sprite. 
+* ~ updated example to use new sprite functions.
+* \+ Added a spriteCreator to generate sprites from PNG images.
+* \+ Added VSYNC functionality

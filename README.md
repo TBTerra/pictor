@@ -14,4 +14,4 @@ It is now on the internet for current and future students to use and possibly ev
 
 The library can be used by simply including pictor.h and any font files you wish to use, pictor.h automatically includes pictor.c so no special compile arguments are needed
 
-Usage of the functions is best seen by looking at the example program, which also comes with pre-compiled .hex (compiled with version 0.3.2 of the library)
+Usage of the functions is best seen by looking at the example program.
