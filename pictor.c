@@ -568,6 +568,7 @@ void pictorDrawSpriteType_(const void* Sprite, const point Pos, const uint8_t ty
 	uint8_t* Buffer;
 	uint8_t* byteCur;
 	uint8_t datH, datL;//only used for types 1,3,5,7
+	uint16_t dat;
 	uint8_t number=0, colour=0;//only used for types 4-7
 	uint8_t mask = 0x80;//only used for types 2-3
 	uint8_t HighFCol, LowFCol, HighBCol, LowBCol;//only used for types 2-3
@@ -627,8 +628,8 @@ void pictorDrawSpriteType_(const void* Sprite, const point Pos, const uint8_t ty
 		case 0x0B:
 			Buffer = (uint8_t*) SpritePacked->palette;
 			for(datH=0;datH<16;datH++){//copy sprite palette to Palette
-				Palette[datH] = ((uint8_t) pgm_read_byte(Buffer++));
-				Palette[datH] |= ((uint8_t) pgm_read_byte(Buffer++))<<8;
+				Palette[datH] = pgm_read_word(Buffer);
+				Buffer+=2;
 			}
 			j = (I.Y * I.X)>>1;
 			while(j--) {
@@ -647,8 +648,8 @@ void pictorDrawSpriteType_(const void* Sprite, const point Pos, const uint8_t ty
 		case 0x0A:
 			Buffer = (uint8_t*) SpritePacked->palette;
 			for(datH=0;datH<16;datH++){//copy sprite palette to Palette
-				Palette[datH] = ((uint8_t) pgm_read_byte(Buffer++));
-				Palette[datH] |= ((uint8_t) pgm_read_byte(Buffer++))<<8;
+				Palette[datH] = pgm_read_word(Buffer);
+				Buffer+=2;
 			}
 			j = (I.Y * I.X)>>1;
 			while(j--) {
@@ -699,8 +700,8 @@ void pictorDrawSpriteType_(const void* Sprite, const point Pos, const uint8_t ty
 		case 7:
 			Buffer = (uint8_t*) SpriteIndex->palette;
 			for(datH=0;datH<16;datH++){//copy sprite palette to Palette
-				Palette[datH] = ((uint8_t) pgm_read_byte(Buffer++));
-				Palette[datH] |= ((uint8_t) pgm_read_byte(Buffer++))<<8;
+				Palette[datH] = pgm_read_word(Buffer);
+				Buffer+=2;
 			}
 			j = I.Y * I.X;
 			while(j--) {
@@ -708,24 +709,17 @@ void pictorDrawSpriteType_(const void* Sprite, const point Pos, const uint8_t ty
 				colour = (uint8_t) ((datL>>4) & 0x0F);//fetch and break bytes into colour and number
 				number = (uint8_t) (datL & 0x0F);
 				
-				if (number == 0) {//single pixel of colour
+				j -= number;
+				do{
 					pictorWordWrite(Palette[colour]);//write colour
-				} else if (number > j) {//overflow avoidance
-					k = (j + 1);
-					while(k--) pictorWordWrite(Palette[colour]);//write colour
-					j = 0;
-				} else {//multiple pixels of colour inside the sprite
-					k = (number + 1);
-					while (k--) pictorWordWrite(Palette[colour]);//write colour
-					j -= number;
-				}
+				}while(number--);
 			}
 			break;
 		case 6:
 			Buffer = (uint8_t*) SpriteIndex->palette;
 			for(datH=0;datH<16;datH++){//copy sprite palette to Palette
-				Palette[datH] = ((uint8_t) pgm_read_byte(Buffer++));
-				Palette[datH] |= ((uint8_t) pgm_read_byte(Buffer++))<<8;
+				Palette[datH] = pgm_read_word(Buffer);
+				Buffer+=2;
 			}
 			j = I.Y * I.X;
 			while(j--) {
@@ -733,17 +727,10 @@ void pictorDrawSpriteType_(const void* Sprite, const point Pos, const uint8_t ty
 				number = (uint8_t) (*byteCur & 0x0F);
 				byteCur++;
 				
-				if (number == 0) {//single pixel of colour
+				j -= number;
+				do{
 					pictorWordWrite(Palette[colour]);//write colour
-				} else if (number > j) {//overflow avoidance
-					k = (j + 1);
-					while(k--) pictorWordWrite(Palette[colour]);//write colour
-					j = 0;
-				} else {//multiple pixels of colour inside the sprite
-					k = (number + 1);
-					while (k--) pictorWordWrite(Palette[colour]);//write colour
-					j -= number;
-				}
+				}while(number--);
 			}
 			break;
 		case 5:
@@ -755,17 +742,10 @@ void pictorDrawSpriteType_(const void* Sprite, const point Pos, const uint8_t ty
 				colour = (uint8_t) ((datL>>4) & 0x0F);//fetch and break bytes into colour and number
 				number = (uint8_t) (datL & 0x0F);
 				
-				if (number == 0) {//single pixel of colour
+				j -= number;
+				do{
 					pictorWordWrite(Palette[colour]);//write colour
-				} else if (number > j) {//overflow avoidance
-					k = (j + 1);
-					while(k--) pictorWordWrite(Palette[colour]);//write colour
-					j = 0;
-				} else {//multiple pixels of colour inside the sprite
-					k = (number + 1);
-					while (k--) pictorWordWrite(Palette[colour]);//write colour
-					j -= number;
-				}
+				}while(number--);
 			}
 			break;
 		case 4:
@@ -776,17 +756,10 @@ void pictorDrawSpriteType_(const void* Sprite, const point Pos, const uint8_t ty
 				number = (uint8_t) (*byteCur & 0x0F);
 				byteCur++;
 				
-				if (number == 0) {//single pixel of colour
+				j -= number;
+				do{
 					pictorWordWrite(Palette[colour]);//write colour
-				} else if (number > j) {//overflow avoidance
-					k = (j + 1);
-					while(k--) pictorWordWrite(Palette[colour]);//write colour
-					j = 0;
-				} else {//multiple pixels of colour inside the sprite
-					k = (number + 1);
-					while (k--) pictorWordWrite(Palette[colour]);//write colour
-					j -= number;
-				}
+				}while(number--);
 			}
 			break;
 		case 3:
@@ -818,10 +791,8 @@ void pictorDrawSpriteType_(const void* Sprite, const point Pos, const uint8_t ty
 		case 1:
 			j = I.X * I.Y;
 			while(j--) {
-				datH = pgm_read_byte(byteCur+1);
-				datL = pgm_read_byte(byteCur);
-				pictorByteWrite( datH );
-				pictorByteWrite( datL );
+				dat = (uint16_t) pgm_read_word(byteCur);
+				pictorWordWrite( dat );
 				byteCur+=2;
 			}
 			break;
@@ -843,6 +814,7 @@ void pictorDrawSpriteType(const void* Sprite, const point Pos, const uint8_t typ
 	uint8_t* byteStart;
 	uint8_t* byteCur;
 	uint8_t datH, datL;//only used for types 1,3,5,7
+	uint16_t dat;
 	uint8_t number=0, lastCol, lastNum, endNum=0xFF, colour=0;//only used for types 4-7
 	uint8_t maskStart, mask = 0x80;//only used for types 2-3
 	uint8_t ProgMem = (type & _BV(0));
@@ -900,8 +872,8 @@ void pictorDrawSpriteType(const void* Sprite, const point Pos, const uint8_t typ
 		case 0x0B:
 			byteStart = (uint8_t*) SpritePacked->palette;
 			for(datH=0;datH<16;datH++){//copy sprite palette to Palette
-				Palette[datH] = ((uint8_t) pgm_read_byte(byteStart++));
-				Palette[datH] |= ((uint8_t) pgm_read_byte(byteStart++))<<8;
+				Palette[datH] = pgm_read_word(byteStart);
+				byteStart+=2;
 			}
 			endNum = 0;
 			while(I.Y--) {
@@ -947,8 +919,8 @@ void pictorDrawSpriteType(const void* Sprite, const point Pos, const uint8_t typ
 		case 0x0A:
 			byteStart = (uint8_t*) SpritePacked->palette;
 			for(datH=0;datH<16;datH++){//copy sprite palette to Palette
-				Palette[datH] = ((uint8_t) pgm_read_byte(byteStart++));
-				Palette[datH] |= ((uint8_t) pgm_read_byte(byteStart++))<<8;
+				Palette[datH] = pgm_read_word(byteStart);
+				byteStart+=2;
 			}
 			endNum = 0;
 			while(I.Y--) {
@@ -1080,8 +1052,8 @@ void pictorDrawSpriteType(const void* Sprite, const point Pos, const uint8_t typ
 		case 7:
 			byteStart = (uint8_t*) SpriteIndex->palette;
 			for(datH=0;datH<16;datH++){//copy sprite palette to Palette
-				Palette[datH] = ((uint8_t) pgm_read_byte(byteStart++));
-				Palette[datH] |= ((uint8_t) pgm_read_byte(byteStart++))<<8;
+				Palette[datH] = pgm_read_word(byteStart);
+				byteStart+=2;
 			}
 			while(I.Y--) {
 				J.Y = Scale;
@@ -1126,8 +1098,8 @@ void pictorDrawSpriteType(const void* Sprite, const point Pos, const uint8_t typ
 		case 6:
 			byteStart = (uint8_t*) SpriteIndex->palette;
 			for(datH=0;datH<16;datH++){//copy sprite palette to Palette
-				Palette[datH] = ((uint8_t) pgm_read_byte(byteStart++));
-				Palette[datH] |= ((uint8_t) pgm_read_byte(byteStart++))<<8;
+				Palette[datH] = pgm_read_word(byteStart);
+				byteStart+=2;
 			}
 			while(I.Y--) {
 				J.Y = Scale;
@@ -1321,10 +1293,8 @@ void pictorDrawSpriteType(const void* Sprite, const point Pos, const uint8_t typ
 					while (I.X--) {
 						J.X = Scale;
 						while (J.X--) {
-							datH = pgm_read_byte(byteCur+1);
-							datL = pgm_read_byte(byteCur);
-							pictorByteWrite( datH );
-							pictorByteWrite( datL );
+							dat = pgm_read_word(byteCur);
+							pictorWordWrite( dat );
 						}
 						byteCur+=2;
 					}
