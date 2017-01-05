@@ -63,6 +63,7 @@ static uint8_t pictorRot = 0;
 //	DATA PORTS -- don't use port B if you intend to use USB!
 #define CTRLPORT	PORTA
 #define CTRLDDR		DDRA
+#define CTRLPIN		PINA
 #define DATAPORT	PORTC
 #define DATADDR		DDRC
 #define DATAPINS	PINC
@@ -142,10 +143,10 @@ void pictorSetRotation(const uint8_t rotation);
 // LCD DRAW CHAR FUNCTIONS
 //=========================
 //	Draws Char onto the screen at Pos with two colours of Font.
-void pictorDrawC(const unsigned char Char, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale);
+void pictorDrawC(const char Char, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale);
 //	Draws String onto the screen at Pos with two colours of Font.
-uint8_t pictorDrawS(const unsigned char* Buffer, point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale);
-uint8_t pictorDrawSP(const unsigned char* Buffer, point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale);
+uint8_t pictorDrawS(const char* Buffer, point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale);
+uint8_t pictorDrawSP(const char* Buffer, point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale);
 
 //=========================
 // LCD DRAW Number FUNCTIONS

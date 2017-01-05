@@ -13,17 +13,17 @@ uint16_t encode656Colour(const uint8_t Red, const uint8_t Green, const uint8_t B
 // BASE LCD CMDS (now with weird inline style define based functions)
 //===============
 inline void pictorCmdWrite(const uint8_t Cmd) {
-	CTRLPORT &=  COMND;
+	CTRLPIN =  (uint8_t)~COMND;
 	DATAPORT  =  Cmd;
-	CTRLPORT &=  WRITE;
-	CTRLPORT |= ~WRITE;
-	CTRLPORT |= ~COMND;
+	CTRLPIN =  (uint8_t)~WRITE;
+	CTRLPIN =  (uint8_t)~WRITE;
+	CTRLPIN =  (uint8_t)~COMND;
 }
 
 inline void pictorByteWrite(const uint8_t Data) {
 	DATAPORT  =  Data;
-	CTRLPORT &=  WRITE;
-	CTRLPORT |= ~WRITE;
+	CTRLPIN =  (uint8_t)~WRITE;
+	CTRLPIN =  (uint8_t)~WRITE;
 }
 
 inline void pictorWordWrite(uint16_t Value) {
@@ -75,42 +75,42 @@ void pictorArrayWrite(const uint8_t* Data, const uint16_t Count){
 	while (HighCount--) { // moved from for loops to while loops
 		I = 17;
 		while (--I) {//moved from post-decrement to pre-decrement (because somehow it's faster)
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Data[Index++];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
 		}
 	}
 	while (LowCount--) {
-		DATAPORT = Data[Index++];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
+		DATAPORT = Data[Index++];	(uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
 	}
 #endif
 }
@@ -132,43 +132,43 @@ void pictorWordArrayWrite(const uint8_t Cmd, const uint16_t* Data, const uint16_
 	while (HighCount--) { // moved from for loops to while loops
 		I = 17;
 		while (--I) {
-			DATAPORT = Byte[Index+1];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Byte[Index];		CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;	Index+= 2;
-			DATAPORT = Byte[Index+1];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Byte[Index];		CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;	Index+= 2;
-			DATAPORT = Byte[Index+1];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Byte[Index];		CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;	Index+= 2;
-			DATAPORT = Byte[Index+1];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Byte[Index];		CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;	Index+= 2;
-			DATAPORT = Byte[Index+1];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Byte[Index];		CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;	Index+= 2;
-			DATAPORT = Byte[Index+1];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Byte[Index];		CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;	Index+= 2;
-			DATAPORT = Byte[Index+1];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Byte[Index];		CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;	Index+= 2;
-			DATAPORT = Byte[Index+1];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Byte[Index];		CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;	Index+= 2;
-			DATAPORT = Byte[Index+1];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Byte[Index];		CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;	Index+= 2;
-			DATAPORT = Byte[Index+1];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Byte[Index];		CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;	Index+= 2;
-			DATAPORT = Byte[Index+1];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Byte[Index];		CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;	Index+= 2;
-			DATAPORT = Byte[Index+1];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Byte[Index];		CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;	Index+= 2;
-			DATAPORT = Byte[Index+1];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Byte[Index];		CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;	Index+= 2;
-			DATAPORT = Byte[Index+1];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Byte[Index];		CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;	Index+= 2;
-			DATAPORT = Byte[Index+1];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Byte[Index];		CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;	Index+= 2;
-			DATAPORT = Byte[Index+1];	CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;
-			DATAPORT = Byte[Index];		CTRLPORT &= WRITE;	CTRLPORT |= ~WRITE;	Index+= 2;
+			DATAPORT = Byte[Index+1];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Byte[Index];		CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;	Index+= 2;
+			DATAPORT = Byte[Index+1];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Byte[Index];		CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;	Index+= 2;
+			DATAPORT = Byte[Index+1];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Byte[Index];		CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;	Index+= 2;
+			DATAPORT = Byte[Index+1];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Byte[Index];		CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;	Index+= 2;
+			DATAPORT = Byte[Index+1];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Byte[Index];		CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;	Index+= 2;
+			DATAPORT = Byte[Index+1];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Byte[Index];		CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;	Index+= 2;
+			DATAPORT = Byte[Index+1];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Byte[Index];		CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;	Index+= 2;
+			DATAPORT = Byte[Index+1];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Byte[Index];		CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;	Index+= 2;
+			DATAPORT = Byte[Index+1];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Byte[Index];		CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;	Index+= 2;
+			DATAPORT = Byte[Index+1];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Byte[Index];		CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;	Index+= 2;
+			DATAPORT = Byte[Index+1];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Byte[Index];		CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;	Index+= 2;
+			DATAPORT = Byte[Index+1];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Byte[Index];		CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;	Index+= 2;
+			DATAPORT = Byte[Index+1];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Byte[Index];		CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;	Index+= 2;
+			DATAPORT = Byte[Index+1];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Byte[Index];		CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;	Index+= 2;
+			DATAPORT = Byte[Index+1];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Byte[Index];		CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;	Index+= 2;
+			DATAPORT = Byte[Index+1];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT = Byte[Index];		CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;	Index+= 2;
 		}
 	}
 	while (LowCount--) {
-		DATAPORT = Byte[Index+1];	CTRLPORT &= WRITE;		CTRLPORT |= ~WRITE;
-		DATAPORT = Byte[Index];	CTRLPORT &= WRITE;		CTRLPORT |= ~WRITE;
+		DATAPORT = Byte[Index+1];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+		DATAPORT = Byte[Index];	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
 		Index += 2;
 	}
 #endif
@@ -190,26 +190,26 @@ void pictorRepeatedByteWrite(const uint8_t Cmd, const uint8_t Data, uint16_t Cou
 	while (HighCount--) {
 		I = 17;
 		while (--I) {
-			CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
+			CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
 		}
 	}
 	while (LowCount--) {
-		CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
+		CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
 	}
 #endif
 }
@@ -231,42 +231,42 @@ void pictorRepeatedWordWrite(const uint8_t Cmd, const uint16_t Data, uint16_t Co
 	while (HighCount--) { // moved from for loops to while loops
 		I = 17;
 		while (--I) { // 16x16 is using a fair bit of memory(pre-decrement rather than post-decrement)
-			DATAPORT  =  HighByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  LowByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  HighByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  LowByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  HighByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  LowByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  HighByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  LowByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  HighByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  LowByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  HighByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  LowByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  HighByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  LowByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  HighByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  LowByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  HighByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  LowByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  HighByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  LowByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  HighByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  LowByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  HighByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  LowByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  HighByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  LowByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  HighByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  LowByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  HighByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  LowByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  HighByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
-			DATAPORT  =  LowByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
+			DATAPORT  =  HighByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  LowByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  HighByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  LowByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  HighByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  LowByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  HighByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  LowByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  HighByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  LowByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  HighByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  LowByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  HighByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  LowByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  HighByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  LowByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  HighByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  LowByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  HighByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  LowByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  HighByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  LowByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  HighByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  LowByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  HighByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  LowByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  HighByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  LowByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  HighByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  LowByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  HighByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
+			DATAPORT  =  LowByte;	CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
 		}
 	}
 	while (LowCount--) {
-		DATAPORT  =  HighByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE; DATAPORT  =  LowByte; CTRLPORT &=  WRITE; CTRLPORT |= ~WRITE;
+		DATAPORT  =  HighByte; CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE; DATAPORT  =  LowByte; CTRLPIN =  (uint8_t)~WRITE;	CTRLPIN =  (uint8_t)~WRITE;
 	}
 #endif
 }
@@ -281,8 +281,7 @@ void pictorRead(const uint8_t Cmd, uint8_t* Buffer, const uint8_t Count) {
 	pictorCmdWrite(Cmd);
 	DATAPORT  =  0x00;
 	DATADDR   =  0x00;
-	CTRLPORT &=  READ;
-	CTRLPORT |= ~READ;
+	CTRLPIN =  (uint8_t)~READ;	CTRLPIN =  (uint8_t)~READ;
 	while (I < Count) {
 		Buffer[I++] = pictorByteRead();
 	}
@@ -323,8 +322,8 @@ void pictorSetRotation(const uint8_t rotation){
 //=========================
 // LCD DRAW CHAR FUNCTIONS
 //=========================
-void pictorDrawC(const unsigned char Char, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const uint8_t* Font, uint8_t scale){
-	if (Char < PICTOR_FONTSTART || Char > PICTOR_FONTEND) return;
+void pictorDrawC(const char Char, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const uint8_t* Font, uint8_t scale){
+	if ((uint8_t)Char < PICTOR_FONTSTART || (uint8_t)Char > PICTOR_FONTEND) return;
 	const uint8_t* fdata;
 	uint8_t bits, mask, I, J;
 	uint8_t k, l;
@@ -332,7 +331,7 @@ void pictorDrawC(const unsigned char Char, const point Pos, const uint16_t Foreg
 	uint8_t HighBCol = (uint8_t)(BackgroundColour >> 8), LowBCol = (uint8_t)(BackgroundColour & 0xFF);//added for opti, standardised name
 	point Pos2 = {Pos.X + (8*scale) - 1, Pos.Y + (8*scale) - 1};
 	pictorCanvasSet(Pos, Pos2);
-	fdata = (Char - PICTOR_FONTSTART)*8 + Font;
+	fdata = ((uint8_t)Char - PICTOR_FONTSTART)*8 + Font;
 	pictorCmdWrite(0x2C); // Memory Write
 	for (I = 0; I < 8; I++) {//draw horizontal line
 		bits = pgm_read_byte(fdata++);
@@ -352,7 +351,7 @@ void pictorDrawC(const unsigned char Char, const point Pos, const uint16_t Foreg
 	}
 }
 
-uint8_t pictorDrawS(const unsigned char* Buffer, point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale) {
+uint8_t pictorDrawS(const char* Buffer, point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale) {
 	uint8_t i = 0;
 	point X1 = Pos;
 	while (Buffer[i]) {
@@ -369,7 +368,7 @@ uint8_t pictorDrawS(const unsigned char* Buffer, point Pos, const uint16_t Foreg
 }
 
 
-uint8_t pictorDrawSP(const unsigned char* Buffer, point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale) {
+uint8_t pictorDrawSP(const char* Buffer, point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale) {
 	uint8_t i = 0;
 	unsigned char dat;
 	point X1 = Pos;
@@ -402,7 +401,7 @@ void pictorDrawD(const int16_t Number, const point Pos, const uint16_t Foregroun
 			i++;
 		}
 	}
-	pictorDrawS((unsigned char*)NumberString, Pos2, ForegroundColour, BackgroundColour, Font, scale);
+	pictorDrawS((char*)NumberString, Pos2, ForegroundColour, BackgroundColour, Font, scale);
 }
 
 uint8_t pictorDrawX(const uint8_t Value, const point Pos, const uint16_t ForegroundColour, const uint16_t BackgroundColour, const font* Font, uint8_t scale) {
@@ -611,13 +610,13 @@ void pictorDrawSpriteType_(const void* Sprite, const point Pos, const uint8_t ty
 			LowFCol = (uint8_t)(SpriteMono->FGcolour & 0xFF);
 			HighBCol = (uint8_t)(SpriteMono->BGcolour >> 8);
 			LowBCol = (uint8_t)(SpriteMono->BGcolour & 0xFF);
+			j2 = I.Y * I.X;
 			break;
 		case 1:
 		case 0:
 			SpriteReg = (sprite*)Sprite;
 			I = SpriteReg->Size;
 			byteCur = (uint8_t*)(SpriteReg->RGB);
-			j2 = I.Y * I.X;
 			break;
 	}
 	
@@ -631,10 +630,23 @@ void pictorDrawSpriteType_(const void* Sprite, const point Pos, const uint8_t ty
 				Palette[datH] = pgm_read_word(Buffer);
 				Buffer+=2;
 			}
-			j = (I.Y * I.X)>>1;
+			j = (I.Y * I.X)>>2;
 			while(j--) {
+				dat = pgm_read_word(byteCur);
+				byteCur+=2;
+				datL = (uint8_t)dat&0xFF;
+				datH = datL>>4;
+				datL &= 0x0F;
+				pictorWordWrite(Palette[datH]);//write upper pixel
+				pictorWordWrite(Palette[datL]);//write lower pixel
+				datL = (uint8_t)(dat>>8);
+				datH = datL>>4;
+				datL &= 0x0F;
+				pictorWordWrite(Palette[datH]);//write upper pixel
+				pictorWordWrite(Palette[datL]);//write lower pixel
+			}
+			if((I.Y * I.X) & 0x02) {
 				datL = pgm_read_byte(byteCur);
-				byteCur++;
 				datH = datL>>4;
 				datL &= 0x0F;
 				pictorWordWrite(Palette[datH]);//write upper pixel
@@ -667,10 +679,23 @@ void pictorDrawSpriteType_(const void* Sprite, const point Pos, const uint8_t ty
 			break;
 		case 9:
 			Palette = SpritePacked->palette;//use palette in sprite
-			j = (I.Y * I.X)>>1;
+			j = (I.Y * I.X)>>2;
 			while(j--) {
+				dat = pgm_read_word(byteCur);
+				byteCur+=2;
+				datL = (uint8_t)dat&0xFF;
+				datH = datL>>4;
+				datL &= 0x0F;
+				pictorWordWrite(Palette[datH]);//write upper pixel
+				pictorWordWrite(Palette[datL]);//write lower pixel
+				datL = (uint8_t)(dat>>8);
+				datH = datL>>4;
+				datL &= 0x0F;
+				pictorWordWrite(Palette[datH]);//write upper pixel
+				pictorWordWrite(Palette[datL]);//write lower pixel
+			}
+			if((I.Y * I.X) & 0x02) {
 				datL = pgm_read_byte(byteCur);
-				byteCur++;
 				datH = datL>>4;
 				datL &= 0x0F;
 				pictorWordWrite(Palette[datH]);//write upper pixel
@@ -1261,10 +1286,11 @@ void pictorDrawSpriteType(const void* Sprite, const point Pos, const uint8_t typ
 				maskStart = mask;//record the read address of the start of the line
 				while (J.Y--) {
 					I.X = SpriteMono->Size.X;
+					datL = *byteCur;
 					while (I.X--) {
 						J.X = Scale;
 						while (J.X--) {
-							if (*byteCur & mask) {//bit is a 1
+							if (datL & mask) {//bit is a 1
 								pictorByteWrite( HighFCol );
 								pictorByteWrite( LowFCol );
 							} else {
@@ -1275,6 +1301,7 @@ void pictorDrawSpriteType(const void* Sprite, const point Pos, const uint8_t typ
 						if(!(mask>>=1)){
 							mask = 0x80;//extract sequential bits from bytes
 							++byteCur;//fetch sequential bytes
+							datL = *byteCur;
 						}
 					}
 					if (J.Y) {

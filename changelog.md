@@ -123,3 +123,9 @@
 * ~ updated example to use new sprite functions.
 * \+ Added a spriteCreator to generate sprites from PNG images.
 * \+ Added VSYNC functionality
+
+### 
+* ~ Changed pin toggling methods to improve performance of base commands by 40%.
+* ~ Using temporary variable in type 2 sprite drawing to reduce frequency of variable dereferences.
+* ~ Changed type 9 & 11 sprite drawing to read program memory in 16-bit words, reducing read overhead.
+* ~ Changed character drawing functions to used regular char, removing signedness warnings on compilation.
