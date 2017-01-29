@@ -472,7 +472,7 @@ void pictorDrawLine(point A, point B, const uint16_t Colour) {
 	}
 }
 
-void pictorDrawBox(point A, point B, const uint16_t Colour) {
+void pictorDrawBox(point A, point B, const uint16_t Colour){
 	point D;
 	if (A.X > B.X) {
 		D.X = A.X;
@@ -489,11 +489,18 @@ void pictorDrawBox(point A, point B, const uint16_t Colour) {
 	D.Y = B.Y - A.Y + 1;
 	uint32_t Pixels = (uint32_t)D.X * (uint32_t)D.Y;	//	TODO: Optimise this
 	if (Pixels > 0xFFFF) {
-		pictorRepeatedWordWrite(0x2C, Colour, ((uint16_t)Pixels) + 1);
-		pictorRepeatedWordWrite(0x3C, Colour, 0xFFFF);
+		pictorRepeatedWordWrite(0x2C, Colour, ((uint16_t)Pixels) + 256);//done for speed reasons (fine as max size is 320x240)
+		pictorRepeatedWordWrite(0x3C, Colour, 0xFF00);
 	} else {
 		pictorRepeatedWordWrite(0x2C, Colour, (uint16_t)Pixels);
 	}
+}
+
+void pictorDrawBoxSR(point A, uint8_t sizeX, uint8_t sizeY, const uint16_t Colour){
+	point B = (point){(A.X+sizeX)-1, (A.Y+sizeY)-1};
+	pictorCanvasSet(A, B);
+	uint16_t pix = sizeX * sizeY;
+	pictorRepeatedWordWrite(0x2C, Colour, pix);
 }
 
 void pictorDrawAll(const uint16_t Colour) {

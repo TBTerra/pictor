@@ -129,3 +129,4 @@
 * ~ Using temporary variable in type 2 sprite drawing to reduce frequency of variable dereferences.
 * ~ Changed type 9 & 11 sprite drawing to read program memory in 16-bit words, reducing read overhead.
 * ~ Changed character drawing functions to used regular char, removing signedness warnings on compilation.
+* ~ Added pictorDrawBoxSR function to allow for boxes drawn using dimensions up to 255 per side length.
